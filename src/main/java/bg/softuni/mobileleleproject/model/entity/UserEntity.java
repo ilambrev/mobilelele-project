@@ -1,14 +1,16 @@
 package bg.softuni.mobileleleproject.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "password")
@@ -22,6 +24,23 @@ public class UserEntity extends BaseEntity {
 
     @Column(name = "is_active")
     private boolean isActive;
+
+    @OneToOne(targetEntity = UserRoleEntity.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private UserRoleEntity role;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column(name = "created")
+    private LocalDateTime created;
+
+    @Column(name = "modified")
+    private LocalDateTime modified;
+
+    public UserEntity() {
+
+    }
 
     public String getEmail() {
         return email;
@@ -67,5 +86,41 @@ public class UserEntity extends BaseEntity {
         isActive = active;
         return this;
     }
-    
+
+    public UserRoleEntity getRole() {
+        return role;
+    }
+
+    public UserEntity setRole(UserRoleEntity role) {
+        this.role = role;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public UserEntity setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public UserEntity setCreated(LocalDateTime created) {
+        this.created = created;
+        return this;
+    }
+
+    public LocalDateTime getModified() {
+        return modified;
+    }
+
+    public UserEntity setModified(LocalDateTime modified) {
+        this.modified = modified;
+        return this;
+    }
+
 }
