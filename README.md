@@ -1,2 +1,2 @@
 # mobilelele-project
-Spring Boot project from Java Web Module
+SoftUni Java Web Module - Spring Boot Project
