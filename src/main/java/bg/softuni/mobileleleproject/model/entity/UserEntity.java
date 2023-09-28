@@ -24,7 +24,7 @@ public class UserEntity extends BaseEntity {
     private boolean isActive;
 
     @OneToOne(targetEntity = UserRoleEntity.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private UserRoleEntity role;
 
     @Column(name = "image_url")
