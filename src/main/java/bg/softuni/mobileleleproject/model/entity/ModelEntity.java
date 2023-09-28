@@ -112,5 +112,5 @@ public class ModelEntity extends BaseEntity {
         this.brand = brand;
         return this;
     }
-    
+
 }
