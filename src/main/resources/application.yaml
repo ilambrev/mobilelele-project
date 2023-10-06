@@ -8,12 +8,18 @@ spring:
         database-platform: org.hibernate.dialect.MySQLDialect
         hibernate:
             ddl-auto: update
+        properties:
+            hibernate:
+                show_sql: true
+                format_sql: true
         open-in-view: false
     sql:
         init:
             mode: never
+#            mode: always
 logging:
     level:
-        org: WARN
-        blog: WARN
-
+        org:
+            hibernate:
+                sql: debug
+                type: trace

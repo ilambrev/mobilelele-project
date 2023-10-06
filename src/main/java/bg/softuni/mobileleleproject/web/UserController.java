@@ -8,11 +8,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/users")
 public class UserController {
 
-@GetMapping("/register")
+    @GetMapping("/register")
     public String register() {
 
-    return "/auth-register";
-}
+        return "/auth-register";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+
+        return "/auth-login";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+
+        return "index";
+    }
 
 
 }

@@ -33,8 +33,8 @@ public class ModelEntity extends BaseEntity {
     @Column(name = "modified")
     private LocalDateTime modified;
 
-    @ManyToOne(targetEntity = BrandEntity.class, optional = false)
-    @JoinColumn(name = "brand_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(targetEntity = BrandEntity.class)
+    @JoinColumn(name = "brand_id", referencedColumnName = "id")
     private BrandEntity brand;
 
     public ModelEntity() {

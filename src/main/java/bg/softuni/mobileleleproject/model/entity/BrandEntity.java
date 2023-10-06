@@ -1,11 +1,13 @@
 package bg.softuni.mobileleleproject.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+@NamedEntityGraph(name = "brandWithModels",
+        attributeNodes = @NamedAttributeNode("models"))
 @Entity
 @Table(name = "brands")
 public class BrandEntity extends BaseEntity {
@@ -19,8 +21,12 @@ public class BrandEntity extends BaseEntity {
     @Column(name = "modified")
     private LocalDateTime modified;
 
-    public BrandEntity() {
+    @OneToMany(targetEntity = ModelEntity.class, mappedBy = "brand")
+    @OrderBy("name ASC")
+    private List<ModelEntity> models;
 
+    public BrandEntity() {
+        this.models = new ArrayList<>();
     }
 
     public String getName() {
@@ -47,6 +53,15 @@ public class BrandEntity extends BaseEntity {
 
     public BrandEntity setModified(LocalDateTime modified) {
         this.modified = modified;
+        return this;
+    }
+
+    public List<ModelEntity> getModels() {
+        return models;
+    }
+
+    public BrandEntity setModels(List<ModelEntity> models) {
+        this.models = models;
         return this;
     }
 

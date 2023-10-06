@@ -47,12 +47,12 @@ public class OfferEntity extends BaseEntity {
     @Column(name = "modified")
     private LocalDateTime modified;
 
-    @ManyToOne(targetEntity = ModelEntity.class, optional = false)
-    @JoinColumn(name = "model_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(targetEntity = ModelEntity.class)
+    @JoinColumn(name = "model_id", referencedColumnName = "id")
     private ModelEntity model;
 
-    @ManyToOne(targetEntity = UserEntity.class, optional = false)
-    @JoinColumn(name = "seller_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(targetEntity = UserEntity.class)
+    @JoinColumn(name = "seller_id", referencedColumnName = "id")
     private UserEntity seller;
 
     public OfferEntity() {
