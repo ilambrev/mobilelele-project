@@ -15,6 +15,10 @@ public class UserRoleEntity extends BaseEntity {
 
     }
 
+    public UserRoleEntity(RoleEnum name) {
+        this.name = name;
+    }
+
     public RoleEnum getName() {
         return name;
     }

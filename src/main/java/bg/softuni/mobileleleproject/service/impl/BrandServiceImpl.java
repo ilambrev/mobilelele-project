@@ -21,7 +21,6 @@ public class BrandServiceImpl implements BrandService {
         this.brandRepository = brandRepository;
     }
 
-    @PostConstruct
     @Override
     public List<BrandDTO> getAllBrands() {
         return this.brandRepository.findAllByOrderByName()
