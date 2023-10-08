@@ -1,15 +1,29 @@
 package bg.softuni.mobileleleproject.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
+
 public class UserRegistrationDTO {
 
+    @NotBlank
+    @Length(min = 2, max = 20)
     private String firstName;
 
+    @NotBlank
+    @Length(min = 2, max = 20)
     private String lastName;
 
+    @NotBlank
+    @Length(min = 6)
+    @Pattern(regexp = "^(.+)@(.+)$")
     private String email;
 
+    @NotBlank
+    @Length(min = 2, max = 20)
     private String password;
 
+    @NotBlank
     private String confirmPassword;
 
     public UserRegistrationDTO() {

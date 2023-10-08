@@ -23,7 +23,7 @@ public class UserEntity extends BaseEntity {
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
-    @OneToOne(targetEntity = UserRoleEntity.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = UserRoleEntity.class)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private UserRoleEntity role;
 

@@ -25,7 +25,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(UserRegistrationDTO userRegistrationDTO) {
+    public Boolean registerUser(UserRegistrationDTO userRegistrationDTO) {
+
+        if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())) {
+            return false;
+        }
+
+        if (this.userRepository.findByEmail(userRegistrationDTO.getEmail()).isPresent()) {
+//            throw new IllegalArgumentException("This email address is not available. Choose a different address!");
+
+            return false;
+        }
 
         UserEntity user = new UserEntity()
                 .setEmail(userRegistrationDTO.getEmail())
@@ -37,6 +47,8 @@ public class UserServiceImpl implements UserService {
                 .setRole(this.userRoleService.getRole("USER"));
 
         this.userRepository.save(user);
+
+        return true;
 
     }
 

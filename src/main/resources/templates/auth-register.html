@@ -25,29 +25,32 @@
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
                 <input id="firstName" type="text" min="2" max="20" class="form-control"
                        th:field="*{firstName}"
+                       th:errorclass="'is-invalid alert-danger'"
                        placeholder="First name"/>
-                <p class="errors alert alert-danger">
-                    First name is required.
+                <p class="errors alert alert-danger invalid-feedback">
+                    First name is required with length between 2 and 20 symbols.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="lastName" class="text-white font-weight-bold">Last Name</label>
                 <input id="lastName" type="text" min="2" max="20" class="form-control"
                        th:field="*{lastName}"
+                       th:errorclass="'is-invalid alert-danger'"
                        placeholder="First name"/>
-                <p class="errors alert alert-danger">
-                    Last name is required.
+                <p class="errors alert alert-danger invalid-feedback">
+                    Last name is required with length between 2 and 20 symbols.
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="email" class="text-white font-weight-bold">Email</label>
-                <input id="email" type="text" min="2" max="20" class="form-control"
+                <input id="email" type="text" min="6" class="form-control"
                        th:field="*{email}"
+                       th:errorclass="'is-invalid alert-danger'"
                        placeholder="Email"/>
-                <p class="errors alert alert-danger">
-                    Email is required.
+                <p class="errors alert alert-danger invalid-feedback">
+                    Please enter a valid email address!
                 </p>
             </div>
         </div>
@@ -56,17 +59,19 @@
                 <label for="password" class="text-white font-weight-bold">Password</label>
                 <input id="password" type="password" min="2" max="20" class="form-control"
                        th:field="*{password}"
+                       th:errorclass="'is-invalid alert-danger'"
                        placeholder="Password"/>
-                <p class="errors alert alert-danger">
-                    Password is required.
+                <p class="errors alert alert-danger invalid-feedback">
+                    Password is required with length between 2 and 20 symbols.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="confirmPassword" class="text-white font-weight-bold">Confirm Password</label>
                 <input id="confirmPassword" type="password" min="2" max="20" class="form-control"
                        th:field="*{confirmPassword}"
+                       th:errorclass="'is-invalid alert-danger'"
                        placeholder="Confirm Password"/>
-                <p class="errors alert alert-danger">
+                <p class="errors alert alert-danger invalid-feedback">
                     Password confirmation is required.
                 </p>
             </div>
