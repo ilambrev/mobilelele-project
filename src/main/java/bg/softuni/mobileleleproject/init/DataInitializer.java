@@ -49,7 +49,8 @@ public class DataInitializer implements CommandLineRunner {
                     .setLastName("Dickinson")
                     .setCreated(LocalDateTime.now())
                     .setImageUrl("https://www.expertimpact.com/wp-content/uploads/2023/07/speaker-profile-web-11-2.png")
-                    .setActive(true);
+                    .setActive(true)
+                    .setRole(this.userRoleRepository.findByName(RoleEnum.valueOf("ADMIN")));
 
             this.userRepository.save(administrator);
 
