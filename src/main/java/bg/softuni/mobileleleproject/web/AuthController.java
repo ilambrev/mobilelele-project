@@ -1,10 +1,12 @@
 package bg.softuni.mobileleleproject.web;
 
+import bg.softuni.mobileleleproject.model.dto.UserLoginDTO;
 import bg.softuni.mobileleleproject.model.dto.UserRegistrationDTO;
 import bg.softuni.mobileleleproject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,15 +26,13 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    public String showRegistrationForm() {
+    public String showRegistrationForm(Model model) {
 
-        return "/auth-register";
-    }
+        if (!model.containsAttribute("userRegistrationDTO")) {
+            model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
+        }
 
-    @ModelAttribute("userRegistrationDTO")
-    public UserRegistrationDTO initUserRegistrationDTO() {
-
-        return new UserRegistrationDTO();
+        return "auth-register";
     }
 
     @PostMapping("/register/save")
@@ -44,21 +44,46 @@ public class AuthController {
             redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
 
-            return ("/auth-register");
+            return ("redirect:/users/register");
         }
 
         return "redirect:/users/login";
     }
 
+    @ModelAttribute("badCredentials")
+    public boolean initBadCredentials() {
+
+        return false;
+    }
+
     @GetMapping("/login")
-    public String login() {
+    public String showLoginForm(Model model) {
+
+        if (!model.containsAttribute("userLoginDTO")) {
+            model.addAttribute("userLoginDTO", new UserLoginDTO());
+        }
 
         return "/auth-login";
     }
 
+    @PostMapping("/login")
+    public String login(UserLoginDTO userLoginDTO,
+                        RedirectAttributes redirectAttributes) {
+
+        if (!this.userService.loginUser(userLoginDTO)) {
+            redirectAttributes.addFlashAttribute("userLoginDTO", userLoginDTO);
+            redirectAttributes.addFlashAttribute("badCredentials", true);
+
+            return "redirect:/users/login";
+        }
+
+        return "redirect:/";
+    }
+
     @GetMapping("/logout")
     public String logout() {
-
+        this.userService.logOutUser();
+        
         return "index";
     }
 

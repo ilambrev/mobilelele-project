@@ -17,17 +17,16 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto col-12 justify-content-between">
-            <li class="nav-item"
-            >
+            <li class="nav-item" th:if="${@currentUser.isLogged()}">
                 <a class="nav-link" href="/brands/all">All Brands</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" th:if="${@currentUser.isLogged()}">
                 <a class="nav-link" href="/offers/add">Add Offer</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" th:if="${@currentUser.isLogged()}">
                 <a class="nav-link" href="/offers/all">All Offers</a>
-            </li>
-            <li class="nav-item dropdown">
+            </li>"
+            <li class="nav-item dropdown" th:if="${@currentUser.isAdmin()}">
                 <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Admin
@@ -39,18 +38,20 @@
                     <a class="dropdown-item" href="/">Something else here</a>
                 </div>
             </li>
-            <li class="nav-item">
+
+            <li class="nav-item" th:if="${@currentUser.isLogged()}">
                 <div class="form-inline my-2 my-lg-0 border px-3">
-                    <div class="logged-user"
-                         text="Welcome, Gosho"></div>
+                    <div class="logged-user">
+                        Welcome, <span th:text="${@currentUser.getFullName()}">Gosho</span>
+                    </div>
                     <a class="nav-link" href="/users/logout">Logout</a>
                 </div>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" th:unless="${@currentUser.isLogged()}">
                 <a class="nav-link" href="/users/register">Register</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" th:unless="${@currentUser.isLogged()}">
                 <a class="nav-link" href="/users/login">Login</a>
             </li>
 

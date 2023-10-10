@@ -2,8 +2,8 @@
 # VALUES (1, 'ADMIN'),
 #        (2, 'USER');
 
-INSERT INTO `users` (`id`, `email`, `first_name`, `is_active`, `last_name`, `password`, `role_id`)
-VALUES (2, 'user@mobilele.bg', 'James', 1, 'Hetfield', '95c1933b8ffe84f085f2839899d1673260be58dbd9c2c787ac35515805502c996417596dae9a92880aaa50a046fc7151', 2);
+# INSERT INTO `users` (`id`, `email`, `first_name`, `is_active`, `last_name`, `password`, `role_id`)
+# VALUES (2, 'user@mobilele.bg', 'James', 1, 'Hetfield', '95c1933b8ffe84f085f2839899d1673260be58dbd9c2c787ac35515805502c996417596dae9a92880aaa50a046fc7151', 2);
 
 INSERT INTO `brands` (`id`, `created`, `name`)
 VALUES (1, '2023-10-06 15:20:13.280835', 'Toyota'),

@@ -19,7 +19,8 @@ spring:
 #            mode: always
 logging:
     level:
-        org:
-            hibernate:
-                sql: debug
-                type: trace
+#      org.hibernate.orm.jdbc.bind: trace
+      org.hibernate.type: trace
+#      org.hibernate.stat: debug
+      org.hibernate:sql: debug
+#      org.hibernate.type.descriptor.sql.BasicBinder: trace

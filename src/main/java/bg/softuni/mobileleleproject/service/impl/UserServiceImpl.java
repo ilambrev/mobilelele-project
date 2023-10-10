@@ -1,14 +1,17 @@
 package bg.softuni.mobileleleproject.service.impl;
 
+import bg.softuni.mobileleleproject.model.dto.UserLoginDTO;
 import bg.softuni.mobileleleproject.model.dto.UserRegistrationDTO;
 import bg.softuni.mobileleleproject.model.entity.UserEntity;
 import bg.softuni.mobileleleproject.repository.UserRepository;
 import bg.softuni.mobileleleproject.service.UserService;
+import bg.softuni.mobileleleproject.util.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,12 +19,14 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserRoleServiceImpl userRoleService;
     private final PasswordEncoder passwordEncoder;
+    private final CurrentUser currentUser;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserRoleServiceImpl userRoleService, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, UserRoleServiceImpl userRoleService, PasswordEncoder passwordEncoder, CurrentUser currentUser) {
         this.userRepository = userRepository;
         this.userRoleService = userRoleService;
         this.passwordEncoder = passwordEncoder;
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -32,7 +37,6 @@ public class UserServiceImpl implements UserService {
         }
 
         if (this.userRepository.findByEmail(userRegistrationDTO.getEmail()).isPresent()) {
-//            throw new IllegalArgumentException("This email address is not available. Choose a different address!");
 
             return false;
         }
@@ -50,6 +54,34 @@ public class UserServiceImpl implements UserService {
 
         return true;
 
+    }
+
+    @Override
+    public Boolean loginUser(UserLoginDTO userLoginDTO) {
+
+        Optional<UserEntity> optionalUser = this.userRepository.findByEmail(userLoginDTO.getEmail());
+
+        if (optionalUser.isEmpty()) {
+            return false;
+        }
+
+        UserEntity user = optionalUser.get();
+
+        if (!this.passwordEncoder.matches(userLoginDTO.getPassword(), user.getPassword())) {
+            return false;
+        }
+
+        this.currentUser.setFirstName(user.getFirstName())
+                .setLastName(user.getLastName())
+                .setRole(user.getRole())
+                .setLogged(true);
+
+        return true;
+    }
+
+    @Override
+    public void logOutUser() {
+        this.currentUser.logout();
     }
 
 }
