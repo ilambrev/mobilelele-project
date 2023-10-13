@@ -26,7 +26,7 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
+    public String getRegistrationForm(Model model) {
 
         if (!model.containsAttribute("userRegistrationDTO")) {
             model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
@@ -80,11 +80,11 @@ public class AuthController {
         return "redirect:/";
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public String logout() {
         this.userService.logOutUser();
-        
-        return "index";
+
+        return "redirect:/";
     }
 
 }

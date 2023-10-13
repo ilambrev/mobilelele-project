@@ -16,15 +16,15 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto col-12 justify-content-between">
+        <ul class="navbar-nav mr-auto col-12 justify-content-end">
             <li class="nav-item" th:if="${@currentUser.isLogged()}">
-                <a class="nav-link" href="/brands/all">All Brands</a>
+                <a class="nav-link" th:href="@{/brands/all}">All Brands</a>
             </li>
             <li class="nav-item" th:if="${@currentUser.isLogged()}">
-                <a class="nav-link" href="/offers/add">Add Offer</a>
+                <a class="nav-link" th:href="@{/offers/add}">Add Offer</a>
             </li>
             <li class="nav-item" th:if="${@currentUser.isLogged()}">
-                <a class="nav-link" href="/offers/all">All Offers</a>
+                <a class="nav-link" th:href="@{/offers/all}">All Offers</a>
             </li>"
             <li class="nav-item dropdown" th:if="${@currentUser.isAdmin()}">
                 <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
@@ -44,15 +44,21 @@
                     <div class="logged-user">
                         Welcome, <span th:text="${@currentUser.getFullName()}">Gosho</span>
                     </div>
-                    <a class="nav-link" href="/users/logout">Logout</a>
+                    <form th:method="POST" th:action="@{/users/logout}">
+                        <!-- <a class="nav-link" th:href="/users/logout">Logout</a>-->
+                        <button type="submit"
+                                class="btn btn-link nav-link"
+                                style="text-decoration: none; padding-top: 8px">Logout
+                        </button>
+                    </form>
                 </div>
             </li>
 
             <li class="nav-item" th:unless="${@currentUser.isLogged()}">
-                <a class="nav-link" href="/users/register">Register</a>
+                <a class="nav-link" th:href="@{/users/register}">Register</a>
             </li>
             <li class="nav-item" th:unless="${@currentUser.isLogged()}">
-                <a class="nav-link" href="/users/login">Login</a>
+                <a class="nav-link" th:href="@{/users/login}">Login</a>
             </li>
 
         </ul>
