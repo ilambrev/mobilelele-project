@@ -13,10 +13,15 @@
 
 <div class="container">
     <h2 class="text-center text-white m-3">All Brands</h2>
-    <div class='row mb-4 d-flex justify-content-around'>
-        <div class="brand-section col-md-5 mr-auto d-flex flex-column">
+    <!--<div class='row mb-4 d-flex justify-content-around'>-->
+    <div class='d-flex flex-row flex-wrap justify-content-between' style="row-gap: 20px">
+        <!--Shrink Brands cell size according to number of models with class: align-self-start-->
+        <!--<div class="brand-section col-md-5 mr-auto d-flex flex-column align-self-start"-->
+        <!--<div class="brand-section col-md-5 mr-auto d-flex flex-column">-->
+        <div class="brand-section col-md-5 d-flex flex-column align-self-start"
+             th:each="brand: ${brands}">
             <h2>Car brand:
-                <span>Brand name</span>
+                <span th:text="${brand.getName()}">Brand name</span>
             </h2>
             <div>Models:
                 <table>
@@ -28,13 +33,13 @@
                         <th>End Year</th>
                         <th>Picture</th>
                     </tr>
-                    <tr>
-                        <th>No</th>
-                        <th>Model Name</th>
-                        <th>Model Category</th>
-                        <th>Model Start Year</th>
-                        <th>Model End Year</th>
-                        <th><img alt="image" src="/"
+                    <tr th:each="model, iStat: ${brand.getModels()}">
+                        <th th:text="${iStat.index + 1}">No</th>
+                        <th th:text="${model.getName()}">Model Name</th>
+                        <th th:text="${model.getCategory()}">Model Category</th>
+                        <th th:text="${model.getStartYear()}">Model Start Year</th>
+                        <th th:text="${model.getEndYear()}">Model End Year</th>
+                        <th><img alt="image" th:src="@{${model.getImageUrl()}}"
                                  class="img-thumbnail rounded"></th>
                     </tr>
                 </table>

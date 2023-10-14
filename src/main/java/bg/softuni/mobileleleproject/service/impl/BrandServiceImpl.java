@@ -4,7 +4,6 @@ import bg.softuni.mobileleleproject.model.dto.BrandDTO;
 import bg.softuni.mobileleleproject.model.dto.ModelDTO;
 import bg.softuni.mobileleleproject.repository.BrandRepository;
 import bg.softuni.mobileleleproject.service.BrandService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,11 @@ public class BrandServiceImpl implements BrandService {
                         brand.getModels().stream()
                                 .map(model -> new ModelDTO(
                                         model.getId(),
-                                        model.getName()
+                                        model.getName(),
+                                        model.getCategory().name(),
+                                        model.getImageUrl(),
+                                        model.getStartYear(),
+                                        model.getEndYear()
                                 )).collect(Collectors.toList())
                 )).collect(Collectors.toList());
 
