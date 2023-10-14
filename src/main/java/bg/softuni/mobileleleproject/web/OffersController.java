@@ -24,9 +24,11 @@ public class OffersController {
     }
 
     @GetMapping("/all")
-    public String getAll() {
+    public String getAll(Model model) {
 
-        return ("/offers");
+        model.addAttribute("offers", this.offerService.getAllOffers());
+
+        return ("offers");
     }
 
     @GetMapping("/add")
@@ -36,7 +38,7 @@ public class OffersController {
             model.addAttribute("createOfferDTO", new CreateOfferDTO());
         }
 
-        return "/offer-add";
+        return "offer-add";
     }
 
     @PostMapping("/add")
