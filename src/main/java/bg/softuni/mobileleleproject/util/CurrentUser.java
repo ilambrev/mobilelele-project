@@ -8,6 +8,8 @@ import org.springframework.web.context.annotation.SessionScope;
 @SessionScope
 public class CurrentUser {
 
+    private Long id;
+
     private String firstName;
 
     private String lastName;
@@ -18,6 +20,15 @@ public class CurrentUser {
 
     public CurrentUser() {
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public CurrentUser setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getFirstName() {
@@ -75,6 +86,7 @@ public class CurrentUser {
     }
 
     public void logout() {
+        this.id = null;
         this.firstName = null;
         this.lastName = null;
         this.role = null;

@@ -71,7 +71,8 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        this.currentUser.setFirstName(user.getFirstName())
+        this.currentUser.setId(user.getId())
+                .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())
                 .setRole(user.getRole())
                 .setLogged(true);
