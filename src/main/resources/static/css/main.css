@@ -1,5 +1,5 @@
 body {
-     background-image: url('/img/1.jpg');
+     background-image: url('../img/1.jpg');
      background-position: center center;
      background-repeat: no-repeat;
      background-attachment: fixed;
@@ -61,12 +61,12 @@ form.main-form {
 /*Style for Logout Button in form - to implement POST method*/
 .btn-logout {
      text-decoration: none;
-     padding-top: 8px
+     padding-top: 8px;
 }
 
 /*Style for img in card to cover whole card*/
 .img-cover {
      width: 100%;
      height: 100%;
-     object-fit: cover
+     object-fit: cover;
 }
