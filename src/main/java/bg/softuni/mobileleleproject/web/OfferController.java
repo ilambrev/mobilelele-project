@@ -1,6 +1,6 @@
 package bg.softuni.mobileleleproject.web;
 
-import bg.softuni.mobileleleproject.model.dto.CreateOfferDTO;
+import bg.softuni.mobileleleproject.model.dto.OfferCreateDTO;
 import bg.softuni.mobileleleproject.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +37,7 @@ public class OfferController {
     public String showAddingForm(Model model) {
 
         if (!model.containsAttribute("createOfferDTO")) {
-            model.addAttribute("createOfferDTO", new CreateOfferDTO());
+            model.addAttribute("createOfferDTO", new OfferCreateDTO());
         }
 
         return "offer-add";
