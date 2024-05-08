@@ -37,7 +37,7 @@ public class OfferController {
     }
 
     @GetMapping("/add")
-    public String showAddingForm(Model model) {
+    public String showAddForm(Model model) {
 
         if (!model.containsAttribute("offerCreateDTO")) {
             model.addAttribute("offerCreateDTO", new OfferCreateDTO());
