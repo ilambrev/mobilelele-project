@@ -1,13 +1,9 @@
 package bg.softuni.mobileleleproject.service.impl;
 
-import bg.softuni.mobileleleproject.model.entity.ModelEntity;
 import bg.softuni.mobileleleproject.repository.ModelRepository;
 import bg.softuni.mobileleleproject.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ModelServiceImpl implements ModelService {
@@ -19,11 +15,4 @@ public class ModelServiceImpl implements ModelService {
         this.modelRepository = modelRepository;
     }
 
-    @Override
-    public List<String> getAllModelsNames() {
-        return this.modelRepository.findAll(Sort.by(Sort.Direction.ASC, "name"))
-                .stream()
-                .map(ModelEntity::getName)
-                .toList();
-    }
 }

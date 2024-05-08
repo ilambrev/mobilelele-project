@@ -3,6 +3,7 @@ package bg.softuni.mobileleleproject.web;
 import bg.softuni.mobileleleproject.model.dto.OfferCreateDTO;
 import bg.softuni.mobileleleproject.model.enums.EngineEnum;
 import bg.softuni.mobileleleproject.model.enums.TransmissionEnum;
+import bg.softuni.mobileleleproject.service.BrandService;
 import bg.softuni.mobileleleproject.service.ModelService;
 import bg.softuni.mobileleleproject.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,12 @@ import java.util.UUID;
 public class OfferController {
 
     private final OfferService offerService;
-    private final ModelService modelService;
+    private final BrandService brandService;
 
     @Autowired
-    public OfferController(OfferService offerService, ModelService modelService) {
+    public OfferController(OfferService offerService, BrandService brandService) {
         this.offerService = offerService;
-        this.modelService = modelService;
+        this.brandService = brandService;
     }
 
 
@@ -42,8 +43,8 @@ public class OfferController {
             model.addAttribute("offerCreateDTO", new OfferCreateDTO());
         }
 
-        if (!model.containsAttribute("modelsNames")) {
-            model.addAttribute("modelsNames", this.modelService.getAllModelsNames());
+        if (!model.containsAttribute("brands")) {
+            model.addAttribute("brands", this.brandService.getAllBrands());
         }
 
         if (!model.containsAttribute("engineTypes")) {

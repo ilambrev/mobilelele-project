@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 public class OfferCreateDTO {
 
-    private String model;
+    private Long modelId;
 
     @Positive(message = "Price must be positive number")
     @NotNull
@@ -37,12 +37,12 @@ public class OfferCreateDTO {
 
     }
 
-    public String getModel() {
-        return model;
+    public Long getModelId() {
+        return modelId;
     }
 
-    public OfferCreateDTO setModel(String model) {
-        this.model = model;
+    public OfferCreateDTO setModelId(Long modelId) {
+        this.modelId = modelId;
         return this;
     }
 

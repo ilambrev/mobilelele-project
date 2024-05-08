@@ -21,11 +21,14 @@
 
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" for="model">Model</label>
-                <select id="model" name="model" class="form-control">
+                <select id="model" name="modelId" class="form-control">
                     <option value="">- Select a model -</option>
-                    <optgroup label="Brand name" >
-                        <option  th:each="model : ${modelsNames}" th:value="${model}" th:text="${model}">
-                            Model
+                    <optgroup th:each="brand : ${brands}"
+                              th:label="${brand.name}">
+                        <option  th:each="model : ${brand.models}"
+                                 th:value="${model.id}"
+                                 th:text="${model.name}"
+                                 th:selected="${model.id} == *{modelId}">Model
                         </option>
                     </optgroup>
                 </select>
@@ -47,10 +50,10 @@
                 <label class="text-center text-white font-weight-bold" for="engine">Engine</label>
                 <select id="engine" name="engine" class="form-control">
                     <option value="">- Select engine type -</option>
-                    <option th:each="type : ${engineTypes}"
-                            th:value="${type}"
-                            th:text="${#strings.capitalize(#strings.toLowerCase(type))}"
-                            th:selected="${type} == *{engine}">Engine type
+                    <option th:each="engineType : ${engineTypes}"
+                            th:value="${engineType}"
+                            th:text="${#strings.capitalize(#strings.toLowerCase(engineType))}"
+                            th:selected="${engineType} == *{engine}">Engine type
                     </option>
                 </select>
                 <p class="errors alert alert-danger">
@@ -61,10 +64,10 @@
                 <label class="text-center text-white font-weight-bold" for="transmission">Transmission</label>
                 <select id="transmission" name="transmission" class="form-control">
                     <option value="">- Select transmission type -</option>
-                    <option th:each="type : ${transmissionTypes}"
-                            th:value="${type}"
-                            th:text="${#strings.capitalize(#strings.toLowerCase(type))}"
-                            th:selected="${type} == *{transmission}">Transmission type
+                    <option th:each="transmissionType : ${transmissionTypes}"
+                            th:value="${transmissionType}"
+                            th:text="${#strings.capitalize(#strings.toLowerCase(transmissionType))}"
+                            th:selected="${transmissionType} == *{transmission}">Transmission type
                     </option>
                 </select>
                 <p class="errors alert alert-danger">
