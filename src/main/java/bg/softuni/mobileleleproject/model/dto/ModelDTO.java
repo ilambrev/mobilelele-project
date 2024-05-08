@@ -1,7 +1,5 @@
 package bg.softuni.mobileleleproject.model.dto;
 
-import bg.softuni.mobileleleproject.model.enums.CategoryEnum;
-
 public class ModelDTO {
 
     private Long id;

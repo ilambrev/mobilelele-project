@@ -47,8 +47,10 @@
                 <label class="text-center text-white font-weight-bold" for="engine">Engine</label>
                 <select id="engine" name="engine" class="form-control">
                     <option value="">- Select engine type -</option>
-                    <option th:each="type : ${engineTypes}" th:value="${type}" th:text="${#strings.capitalize(#strings.toLowerCase(type))}">
-                        Engine type
+                    <option th:each="type : ${engineTypes}"
+                            th:value="${type}"
+                            th:text="${#strings.capitalize(#strings.toLowerCase(type))}"
+                            th:selected="${type} == *{engine}">Engine type
                     </option>
                 </select>
                 <p class="errors alert alert-danger">
@@ -59,8 +61,10 @@
                 <label class="text-center text-white font-weight-bold" for="transmission">Transmission</label>
                 <select id="transmission" name="transmission" class="form-control">
                     <option value="">- Select transmission type -</option>
-                    <option th:each="type : ${transmissionTypes}" th:value="${type}" th:text="${#strings.capitalize(#strings.toLowerCase(type))}">
-                        Transmission type
+                    <option th:each="type : ${transmissionTypes}"
+                            th:value="${type}"
+                            th:text="${#strings.capitalize(#strings.toLowerCase(type))}"
+                            th:selected="${type} == *{transmission}">Transmission type
                     </option>
                 </select>
                 <p class="errors alert alert-danger">
