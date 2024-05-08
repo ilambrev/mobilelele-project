@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 public class OfferDTO {
 
-
     private String uuid;
 
     private String description;

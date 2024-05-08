@@ -2,19 +2,29 @@ package bg.softuni.mobileleleproject.model.dto;
 
 import bg.softuni.mobileleleproject.model.enums.EngineEnum;
 import bg.softuni.mobileleleproject.model.enums.TransmissionEnum;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
 public class OfferCreateDTO {
 
-    private Long modelId;
+    private String model;
 
+    @Positive(message = "Price must be positive number")
+    @NotNull
     private BigDecimal price;
 
+    @NotNull(message = "Engine type is required")
     private EngineEnum engine;
 
+    @NotNull(message = "Transmission type is required")
     private TransmissionEnum transmission;
 
+    @Min(value = 1885, message = "Year should not be less than 1885")
+    @Max(value = 2024, message = "Year should not be greater than current year")
     private Integer year;
 
     private Integer mileage;
@@ -27,12 +37,12 @@ public class OfferCreateDTO {
 
     }
 
-    public Long getModelId() {
-        return modelId;
+    public String getModel() {
+        return model;
     }
 
-    public OfferCreateDTO setModelId(Long modelId) {
-        this.modelId = modelId;
+    public OfferCreateDTO setModel(String model) {
+        this.model = model;
         return this;
     }
 

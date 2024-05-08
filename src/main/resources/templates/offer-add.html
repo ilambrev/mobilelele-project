@@ -13,20 +13,24 @@
 
 <div class="container">
     <h2 class="text-center text-white">Upload Offer</h2>
-    <form method="POST"
+    <form th:method="POST"
+          th:action="@{/offer/add}"
+          th:object="${offerCreateDTO}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
 
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" for="model">Model</label>
-                <select id="model" class="form-control">
+                <select id="model" name="model" class="form-control">
                     <option value="">- Select a model -</option>
-                    <optgroup label="Brand name">
-                        <option>Model</option>
+                    <optgroup label="Brand name" >
+                        <option  th:each="model : ${modelsNames}" th:value="${model}" th:text="${model}">
+                            Model
+                        </option>
                     </optgroup>
                 </select>
                 <p class="errors alert alert-danger">
-                    Vechicle model is required.
+                    Vehicle model is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
@@ -41,9 +45,9 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" for="engine">Engine</label>
-                <select id="engine" class="form-control">
+                <select id="engine" name="engine" class="form-control">
                     <option value="">- Select engine type -</option>
-                    <option>
+                    <option th:each="type : ${engineTypes}" th:value="${type}" th:text="${#strings.capitalize(#strings.toLowerCase(type))}">
                         Engine type
                     </option>
                 </select>
@@ -53,9 +57,10 @@
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" for="transmission">Transmission</label>
-                <select id="transmission" class="form-control">
+                <select id="transmission" name="transmission" class="form-control">
                     <option value="">- Select transmission type -</option>
-                    <option> Transmission type
+                    <option th:each="type : ${transmissionTypes}" th:value="${type}" th:text="${#strings.capitalize(#strings.toLowerCase(type))}">
+                        Transmission type
                     </option>
                 </select>
                 <p class="errors alert alert-danger">
