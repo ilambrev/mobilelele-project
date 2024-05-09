@@ -30,8 +30,7 @@
                               th:label="${brand.name}">
                         <option  th:each="model : ${brand.models}"
                                  th:value="${model.id}"
-                                 th:text="${model.name}"
-                                 th:selected="${model.id} == *{modelId}">Model
+                                 th:text="${model.name}">Model
                         </option>
                     </optgroup>
                 </select>
@@ -61,8 +60,7 @@
                     <option value="">- Select engine type -</option>
                     <option th:each="engineType : ${engineTypes}"
                             th:value="${engineType}"
-                            th:text="${#strings.capitalize(#strings.toLowerCase(engineType))}"
-                            th:selected="${engineType} == *{engine}">Engine type
+                            th:text="${#strings.capitalize(#strings.toLowerCase(engineType))}">Engine type
                     </option>
                 </select>
                 <p th:if="${#fields.hasErrors('engine')}" th:errors="*{engine}" class="invalid-feedback errors alert alert-danger">
@@ -78,8 +76,7 @@
                     <option value="">- Select transmission type -</option>
                     <option th:each="transmissionType : ${transmissionTypes}"
                             th:value="${transmissionType}"
-                            th:text="${#strings.capitalize(#strings.toLowerCase(transmissionType))}"
-                            th:selected="${transmissionType} == *{transmission}">Transmission type
+                            th:text="${#strings.capitalize(#strings.toLowerCase(transmissionType))}">Transmission type
                     </option>
                 </select>
                 <p th:if="${#fields.hasErrors('transmission')}" th:errors="*{transmission}" class="invalid-feedback errors alert alert-danger">
