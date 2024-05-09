@@ -2,35 +2,39 @@ package bg.softuni.mobileleleproject.model.dto;
 
 import bg.softuni.mobileleleproject.model.enums.EngineEnum;
 import bg.softuni.mobileleleproject.model.enums.TransmissionEnum;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
 public class OfferCreateDTO {
 
+    @NotNull(message = "Vehicle model is required.")
     private Long modelId;
 
-    @Positive(message = "Price must be positive number")
-    @NotNull
+    @NotNull(message = "Price is required.")
+    @Positive(message = "Price must be positive number.")
     private BigDecimal price;
 
-    @NotNull(message = "Engine type is required")
+    @NotNull(message = "Engine type is required.")
     private EngineEnum engine;
 
-    @NotNull(message = "Transmission type is required")
+    @NotNull(message = "Transmission type is required.")
     private TransmissionEnum transmission;
 
-    @Min(value = 1885, message = "Year should not be less than 1885")
-    @Max(value = 2024, message = "Year should not be greater than current year")
+    @NotNull(message = "Manufacturing year is required.")
+    @Min(value = 1885, message = "Year should not be less than 1885.")
+    @Max(value = 2024, message = "Year should not be greater than current year.")
     private Integer year;
 
+    @NotNull(message = "Mileage is required.")
+    @Positive(message = "Value in kilometers must be positive number.")
     private Integer mileage;
 
+    @NotEmpty(message = "Description is required.")
+    @Size(min = 5, max = 512, message = "Length must be between 5 and 512 symbols.")
     private String description;
 
+    @NotEmpty(message = "Vehicle image URL is required.")
     private String imageUrl;
 
     public OfferCreateDTO() {
