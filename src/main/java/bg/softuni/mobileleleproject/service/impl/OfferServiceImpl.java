@@ -1,10 +1,10 @@
 package bg.softuni.mobileleleproject.service.impl;
 
+import bg.softuni.mobileleleproject.model.dto.OfferCreateDTO;
 import bg.softuni.mobileleleproject.model.dto.OfferDTO;
 import bg.softuni.mobileleleproject.model.entity.OfferEntity;
 import bg.softuni.mobileleleproject.repository.OfferRepository;
 import bg.softuni.mobileleleproject.service.OfferService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public List<OfferDTO> getAllOffers() {
-        return this.offerRepository.findAll()
+        return this.offerRepository.findAllByOrderByIdDesc()
                 .stream()
                 .map(offer -> new OfferDTO(
                         offer.getUuid().toString(),
@@ -62,6 +62,11 @@ public class OfferServiceImpl implements OfferService {
                 offer.getModel().getName(),
                 offer.getSeller().getFirstName() + ' ' + offer.getSeller().getLastName()
         );
+    }
+
+    @Override
+    public boolean addOffer(OfferCreateDTO offerCreateDTO) {
+        return true;
     }
 
 }
