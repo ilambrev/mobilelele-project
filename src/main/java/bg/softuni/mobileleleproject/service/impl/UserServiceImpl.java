@@ -1,5 +1,6 @@
 package bg.softuni.mobileleleproject.service.impl;
 
+import bg.softuni.mobileleleproject.exceptions.UserNotFoundException;
 import bg.softuni.mobileleleproject.model.dto.UserLoginDTO;
 import bg.softuni.mobileleleproject.model.dto.UserRegistrationDTO;
 import bg.softuni.mobileleleproject.model.entity.UserEntity;
@@ -83,6 +84,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void logOutUser() {
         this.currentUser.logout();
+    }
+
+    @Override
+    public UserEntity getUserById(Long id) {
+        return this.userRepository
+                .findById(id).orElseThrow(() -> new UserNotFoundException("User with id: " + id + " not found!"));
     }
 
 }

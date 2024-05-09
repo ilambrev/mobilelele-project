@@ -1,5 +1,7 @@
 package bg.softuni.mobileleleproject.service.impl;
 
+import bg.softuni.mobileleleproject.exceptions.ModelNotFoundException;
+import bg.softuni.mobileleleproject.model.entity.ModelEntity;
 import bg.softuni.mobileleleproject.repository.ModelRepository;
 import bg.softuni.mobileleleproject.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,4 +17,9 @@ public class ModelServiceImpl implements ModelService {
         this.modelRepository = modelRepository;
     }
 
+    @Override
+    public ModelEntity getModelById(Long id) {
+        return this.modelRepository.findById(id)
+                .orElseThrow(() -> new ModelNotFoundException("Company with id: " + id + " not found!"));
+    }
 }

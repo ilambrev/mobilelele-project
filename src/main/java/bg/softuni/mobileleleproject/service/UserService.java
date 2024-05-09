@@ -2,6 +2,7 @@ package bg.softuni.mobileleleproject.service;
 
 import bg.softuni.mobileleleproject.model.dto.UserLoginDTO;
 import bg.softuni.mobileleleproject.model.dto.UserRegistrationDTO;
+import bg.softuni.mobileleleproject.model.entity.UserEntity;
 
 public interface UserService {
 
@@ -10,5 +11,7 @@ public interface UserService {
     Boolean loginUser(UserLoginDTO userLoginDTO);
 
     void logOutUser();
+
+    UserEntity getUserById(Long id);
 
 }

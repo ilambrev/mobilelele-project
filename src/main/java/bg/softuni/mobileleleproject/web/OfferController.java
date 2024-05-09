@@ -68,14 +68,14 @@ public class OfferController {
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || !this.offerService.addOffer(offerCreateDTO)) {
             redirectAttributes.addFlashAttribute("offerCreateDTO", offerCreateDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.offerCreateDTO", bindingResult);
 
             return "redirect:/offer/add";
         }
 
-        return "redirect:/";
+        return "redirect:/offers/all";
     }
 
 }
