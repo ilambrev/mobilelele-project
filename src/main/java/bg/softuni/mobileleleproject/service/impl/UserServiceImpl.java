@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
     public Boolean registerUser(UserRegistrationDTO userRegistrationDTO) {
 
         UserEntity user = new UserEntity()
-                .setEmail(userRegistrationDTO.getEmail())
+                .setEmail(userRegistrationDTO.getEmail().toLowerCase(Locale.ENGLISH))
                 .setPassword(this.passwordEncoder.encode(userRegistrationDTO.getPassword()))
                 .setFirstName(userRegistrationDTO.getFirstName())
                 .setLastName(userRegistrationDTO.getLastName())

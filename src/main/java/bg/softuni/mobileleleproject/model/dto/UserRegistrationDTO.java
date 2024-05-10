@@ -4,6 +4,7 @@ import bg.softuni.mobileleleproject.model.validation.FieldMatch;
 import bg.softuni.mobileleleproject.model.validation.UniqueUserEmail;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 
 @FieldMatch(
@@ -22,7 +23,9 @@ public class UserRegistrationDTO {
     private String lastName;
 
     @NotEmpty(message = "Email is required.")
-    @Email(message = "Invalid email format.")
+    @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
+            flags = Pattern.Flag.CASE_INSENSITIVE,
+            message = "Invalid email format.")
     @UniqueUserEmail
     private String email;
 
