@@ -2,6 +2,7 @@ package bg.softuni.mobileleleproject.model.dto;
 
 import bg.softuni.mobileleleproject.model.enums.EngineEnum;
 import bg.softuni.mobileleleproject.model.enums.TransmissionEnum;
+import bg.softuni.mobileleleproject.model.validation.YearNotInTheFuture;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
@@ -21,9 +22,9 @@ public class OfferCreateDTO {
     @NotNull(message = "Transmission type is required.")
     private TransmissionEnum transmission;
 
+    @YearNotInTheFuture(message = "The year should not be in the future.")
     @NotNull(message = "Manufacturing year is required.")
-    @Min(value = 1885, message = "Year should not be less than 1885.")
-    @Max(value = 2024, message = "Year should not be greater than current year.")
+    @Min(value = 1930, message = "The year should not be before 1930.")
     private Integer year;
 
     @NotNull(message = "Mileage is required.")
