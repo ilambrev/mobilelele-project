@@ -33,10 +33,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean registerUser(UserRegistrationDTO userRegistrationDTO) {
 
-        if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())) {
-            return false;
-        }
-
         UserEntity user = new UserEntity()
                 .setEmail(userRegistrationDTO.getEmail())
                 .setPassword(this.passwordEncoder.encode(userRegistrationDTO.getPassword()))
@@ -49,7 +45,6 @@ public class UserServiceImpl implements UserService {
         this.userRepository.save(user);
 
         return true;
-
     }
 
     @Override

@@ -1,37 +1,36 @@
 package bg.softuni.mobileleleproject.model.dto;
 
+import bg.softuni.mobileleleproject.model.validation.FieldMatch;
 import bg.softuni.mobileleleproject.model.validation.UniqueUserEmail;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
+@FieldMatch(
+        first = "password",
+        second = "confirmPassword",
+        message = "Passwords should match."
+)
 public class UserRegistrationDTO {
 
-    @NotNull
-    @NotBlank
-    @Length(min = 2, max = 20)
+    @NotEmpty(message = "First name is required.")
+    @Length(min = 2, max = 20, message = "First name must be between 2 and 20 symbols.")
     private String firstName;
 
-    @NotNull
-    @NotBlank
-    @Length(min = 2, max = 20)
+    @NotEmpty(message = "Last name is required.")
+    @Length(min = 2, max = 20, message = "Last name must be between 2 and 20 symbols.")
     private String lastName;
 
-    @NotNull
-    @NotBlank
-    @Length(min = 6)
-    @Email
+    @NotEmpty(message = "Email is required.")
+    @Email(message = "Invalid email format.")
     @UniqueUserEmail
     private String email;
 
-    @NotNull
-    @NotBlank
-    @Length(min = 2, max = 20)
+    @NotEmpty(message = "Password is required.")
+    @Length(min = 2, max = 20, message = "Password must be between 2 and 20 symbols.")
     private String password;
 
-    @NotNull
-    @NotBlank
+    @NotEmpty(message = "Password confirmation is required.")
     private String confirmPassword;
 
     public UserRegistrationDTO() {

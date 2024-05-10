@@ -20,9 +20,9 @@
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
                 <input id="firstName" type="text" class="form-control"
                        th:field="*{firstName}"
-                       th:errorclass="'is-invalid alert-danger'"
+                       th:errorclass="is-invalid"
                        placeholder="First name"/>
-                <p class="errors alert alert-danger invalid-feedback">
+                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="errors alert alert-danger invalid-feedback">
                     First name is required with length between 2 and 20 symbols.
                 </p>
             </div>
@@ -30,9 +30,9 @@
                 <label for="lastName" class="text-white font-weight-bold">Last Name</label>
                 <input id="lastName" type="text" class="form-control"
                        th:field="*{lastName}"
-                       th:errorclass="'is-invalid alert-danger'"
+                       th:errorclass="is-invalid"
                        placeholder="First name"/>
-                <p class="errors alert alert-danger invalid-feedback">
+                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="errors alert alert-danger invalid-feedback">
                     Last name is required with length between 2 and 20 symbols.
                 </p>
             </div>
@@ -40,11 +40,11 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="email" class="text-white font-weight-bold">Email</label>
-                <input id="email" type="email" class="form-control"
+                <input id="email" type="text" class="form-control"
                        th:field="*{email}"
-                       th:errorclass="'is-invalid alert-danger'"
+                       th:errorclass="is-invalid"
                        placeholder="Email"/>
-                <p class="errors alert alert-danger invalid-feedback">
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="errors alert alert-danger invalid-feedback">
                     Please enter a valid email address!
                 </p>
             </div>
@@ -54,9 +54,9 @@
                 <label for="password" class="text-white font-weight-bold">Password</label>
                 <input id="password" type="password" class="form-control"
                        th:field="*{password}"
-                       th:errorclass="'is-invalid alert-danger'"
+                       th:errorclass="is-invalid"
                        placeholder="Password"/>
-                <p class="errors alert alert-danger invalid-feedback">
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="errors alert alert-danger invalid-feedback">
                     Password is required with length between 2 and 20 symbols.
                 </p>
             </div>
@@ -64,9 +64,9 @@
                 <label for="confirmPassword" class="text-white font-weight-bold">Confirm Password</label>
                 <input id="confirmPassword" type="password" class="form-control"
                        th:field="*{confirmPassword}"
-                       th:errorclass="'is-invalid alert-danger'"
+                       th:errorclass="is-invalid"
                        placeholder="Confirm Password"/>
-                <p class="errors alert alert-danger invalid-feedback">
+                <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="errors alert alert-danger invalid-feedback">
                     Password confirmation is required.
                 </p>
             </div>
