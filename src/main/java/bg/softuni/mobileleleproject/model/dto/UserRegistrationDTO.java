@@ -1,5 +1,6 @@
 package bg.softuni.mobileleleproject.model.dto;
 
+import bg.softuni.mobileleleproject.model.validation.UniqueUserEmail;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,6 +22,7 @@ public class UserRegistrationDTO {
     @NotBlank
     @Length(min = 6)
     @Email
+    @UniqueUserEmail
     private String email;
 
     @NotNull

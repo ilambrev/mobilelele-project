@@ -37,11 +37,6 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        if (this.userRepository.findByEmail(userRegistrationDTO.getEmail()).isPresent()) {
-
-            return false;
-        }
-
         UserEntity user = new UserEntity()
                 .setEmail(userRegistrationDTO.getEmail())
                 .setPassword(this.passwordEncoder.encode(userRegistrationDTO.getPassword()))

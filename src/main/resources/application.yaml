@@ -23,8 +23,10 @@ spring:
 #            mode: always
 logging:
     level:
-#      org.hibernate.orm.jdbc.bind: trace
-      org.hibernate.type: trace
+# For Spring Boot 3
+      org.hibernate.orm.jdbc.bind: trace
+# For Spring Boot 2
+#      org.hibernate.type: trace
 #      org.hibernate.stat: debug
       org.hibernate:sql: debug
 #      org.hibernate.type.descriptor.sql.BasicBinder: trace
