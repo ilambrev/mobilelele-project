@@ -5,7 +5,7 @@ import bg.softuni.mobileleleproject.model.validation.UniqueUserEmail;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
-import org.hibernate.validator.constraints.Length;
+import jakarta.validation.constraints.Size;
 
 @FieldMatch(
         first = "password",
@@ -15,11 +15,11 @@ import org.hibernate.validator.constraints.Length;
 public class UserRegistrationDTO {
 
     @NotEmpty(message = "First name is required.")
-    @Length(min = 2, max = 20, message = "First name must be between 2 and 20 symbols.")
+    @Size(min = 2, max = 20, message = "First name must be between 2 and 20 symbols.")
     private String firstName;
 
     @NotEmpty(message = "Last name is required.")
-    @Length(min = 2, max = 20, message = "Last name must be between 2 and 20 symbols.")
+    @Size(min = 2, max = 20, message = "Last name must be between 2 and 20 symbols.")
     private String lastName;
 
     @NotEmpty(message = "Email is required.")
@@ -30,7 +30,7 @@ public class UserRegistrationDTO {
     private String email;
 
     @NotEmpty(message = "Password is required.")
-    @Length(min = 2, max = 20, message = "Password must be between 2 and 20 symbols.")
+    @Size(min = 2, max = 20, message = "Password must be between 2 and 20 symbols.")
     private String password;
 
     @NotEmpty(message = "Password confirmation is required.")
