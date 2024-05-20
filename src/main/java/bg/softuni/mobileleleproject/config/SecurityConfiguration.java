@@ -1,9 +1,12 @@
 package bg.softuni.mobileleleproject.config;
 
+import bg.softuni.mobileleleproject.repository.UserRepository;
+import bg.softuni.mobileleleproject.service.impl.UserDetailsServiceImpl;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -35,6 +38,11 @@ public class SecurityConfiguration {
         );
 
         return httpSecurity.build();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(UserRepository userRepository) {
+        return new UserDetailsServiceImpl(userRepository);
     }
 
 }
