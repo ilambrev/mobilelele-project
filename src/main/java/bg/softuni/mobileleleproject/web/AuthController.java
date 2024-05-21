@@ -1,6 +1,5 @@
 package bg.softuni.mobileleleproject.web;
 
-import bg.softuni.mobileleleproject.model.dto.UserLoginDTO;
 import bg.softuni.mobileleleproject.model.dto.UserRegistrationDTO;
 import bg.softuni.mobileleleproject.service.UserService;
 import jakarta.validation.Valid;
@@ -57,34 +56,8 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String showLoginForm(Model model) {
-
-        if (!model.containsAttribute("userLoginDTO")) {
-            model.addAttribute("userLoginDTO", new UserLoginDTO());
-        }
+    public String showLoginForm() {
 
         return "/auth-login";
     }
-
-    @PostMapping("/login")
-    public String login(UserLoginDTO userLoginDTO,
-                        RedirectAttributes redirectAttributes) {
-
-        if (!this.userService.loginUser(userLoginDTO)) {
-            redirectAttributes.addFlashAttribute("userLoginDTO", userLoginDTO);
-            redirectAttributes.addFlashAttribute("badCredentials", true);
-
-            return "redirect:/users/login";
-        }
-
-        return "redirect:/";
-    }
-
-    @PostMapping("/logout")
-    public String logout() {
-        this.userService.logOutUser();
-
-        return "redirect:/";
-    }
-
 }

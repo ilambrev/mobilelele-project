@@ -8,10 +8,6 @@ public interface UserService {
 
     Boolean registerUser(UserRegistrationDTO userRegistrationDTO);
 
-    Boolean loginUser(UserLoginDTO userLoginDTO);
-
-    void logOutUser();
-
     UserEntity getUserById(Long id);
 
 }
