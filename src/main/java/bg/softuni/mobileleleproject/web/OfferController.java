@@ -7,6 +7,8 @@ import bg.softuni.mobileleleproject.service.BrandService;
 import bg.softuni.mobileleleproject.service.OfferService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,7 +35,7 @@ public class OfferController {
 
 
     @GetMapping("/details/{uuid}")
-    public String getOfferDetails(@PathVariable("uuid") UUID uuid,
+    public String offerDetails(@PathVariable("uuid") UUID uuid,
                                   Model model) {
 
         model.addAttribute("offer", this.offerService.getOfferByUUID(uuid));
@@ -66,9 +68,12 @@ public class OfferController {
     @PostMapping("/add")
     public String addOffer(@Valid OfferCreateDTO offerCreateDTO,
                            BindingResult bindingResult,
-                           RedirectAttributes redirectAttributes) {
+                           RedirectAttributes redirectAttributes,
+                           @AuthenticationPrincipal UserDetails currentUser) {
 
-        if (bindingResult.hasErrors() || !this.offerService.addOffer(offerCreateDTO)) {
+        System.out.println();
+
+        if (bindingResult.hasErrors() || !this.offerService.addOffer(offerCreateDTO, currentUser)) {
             redirectAttributes.addFlashAttribute("offerCreateDTO", offerCreateDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.offerCreateDTO", bindingResult);
 
@@ -77,5 +82,4 @@ public class OfferController {
 
         return "redirect:/offers/all";
     }
-
 }

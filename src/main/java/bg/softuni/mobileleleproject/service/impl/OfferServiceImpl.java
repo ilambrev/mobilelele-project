@@ -9,8 +9,8 @@ import bg.softuni.mobileleleproject.repository.OfferRepository;
 import bg.softuni.mobileleleproject.service.ModelService;
 import bg.softuni.mobileleleproject.service.OfferService;
 import bg.softuni.mobileleleproject.service.UserService;
-import bg.softuni.mobileleleproject.util.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,14 +23,12 @@ public class OfferServiceImpl implements OfferService {
     private final OfferRepository offerRepository;
     private final ModelService modelService;
     private final UserService userService;
-    private final CurrentUser currentUser;
 
     @Autowired
-    public OfferServiceImpl(OfferRepository offerRepository, ModelService modelService, UserService userService, CurrentUser currentUser) {
+    public OfferServiceImpl(OfferRepository offerRepository, ModelService modelService, UserService userService) {
         this.offerRepository = offerRepository;
         this.modelService = modelService;
         this.userService = userService;
-        this.currentUser = currentUser;
     }
 
     @Override
@@ -77,9 +75,9 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public boolean addOffer(OfferCreateDTO offerCreateDTO) {
+    public boolean addOffer(OfferCreateDTO offerCreateDTO, UserDetails currentUser) {
         ModelEntity model = this.modelService.getModelById(offerCreateDTO.getModelId());
-        UserEntity seller = this.userService.getUserById(this.currentUser.getId());
+        UserEntity seller = this.userService.getUserByEmail(currentUser.getUsername());
         LocalDateTime currentDateTime = LocalDateTime.now();
         OfferEntity offer = new OfferEntity()
                 .setDescription(offerCreateDTO.getDescription())
@@ -98,5 +96,4 @@ public class OfferServiceImpl implements OfferService {
 
         return true;
     }
-
 }

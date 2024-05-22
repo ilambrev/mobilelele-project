@@ -1,6 +1,5 @@
 package bg.softuni.mobileleleproject.service;
 
-import bg.softuni.mobileleleproject.model.dto.UserLoginDTO;
 import bg.softuni.mobileleleproject.model.dto.UserRegistrationDTO;
 import bg.softuni.mobileleleproject.model.entity.UserEntity;
 
@@ -10,4 +9,5 @@ public interface UserService {
 
     UserEntity getUserById(Long id);
 
+    UserEntity getUserByEmail(String email);
 }
