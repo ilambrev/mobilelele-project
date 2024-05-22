@@ -18,21 +18,22 @@
         <div class="form-group">
             <label for="email" class="text-white font-weight-bold">Email</label>
             <input id="email"
-                   th:name="email"
+                   name="email"
+                   th:value="${email}"
                    type="email" class="form-control"
                    placeholder="Email"/>
         </div>
         <div class="form-group">
             <label for="password" class="text-white font-weight-bold">Password</label>
             <input id="password"
-                   th:name="password"
+                   name="password"
                    type="password" class="form-control"
                    placeholder="Password"/>
         </div>
         <div class="form-group">
             <label for="rememberMe" class="text-white font-weight-bold">Remember me</label>
             <input id="rememberMe"
-                   th:name="rememberMe"
+                   name="rememberMe"
                    type="checkbox"
                    class="form-check-inline" />
         </div>

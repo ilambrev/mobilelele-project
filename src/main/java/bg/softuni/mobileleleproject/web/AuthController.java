@@ -49,15 +49,24 @@ public class AuthController {
         return "redirect:/users/login";
     }
 
-    @ModelAttribute("badCredentials")
-    public boolean initBadCredentials() {
-
-        return false;
-    }
-
     @GetMapping("/login")
-    public String showLoginForm() {
+    public String showLoginForm(Model model) {
+        if (!model.containsAttribute("email")) {
+            model.addAttribute("email", null);
+        }
+
+        if (!model.containsAttribute("badCredentials")) {
+            model.addAttribute("badCredentials", false);
+        }
 
         return "/auth-login";
+    }
+
+    @PostMapping("/login-error")
+    public String onError(@ModelAttribute("email") String email, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("email", email);
+        redirectAttributes.addFlashAttribute("badCredentials", true);
+
+        return "redirect:/users/login";
     }
 }
