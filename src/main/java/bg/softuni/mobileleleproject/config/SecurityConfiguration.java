@@ -1,7 +1,9 @@
 package bg.softuni.mobileleleproject.config;
 
+import bg.softuni.mobileleleproject.model.enums.RoleEnum;
 import bg.softuni.mobileleleproject.repository.UserRepository;
 import bg.softuni.mobileleleproject.service.impl.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +16,20 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfiguration {
 
+    private final String rememberMeKey;
+
+    public SecurityConfiguration(@Value("${mobilelele.remember.me.key}") String rememberMeKey) {
+        this.rememberMeKey = rememberMeKey;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(
                 authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/users/login", "users/register", "/users/login-error").permitAll()
+                        .requestMatchers("/offers/all", "/offer/details/**").permitAll()
+                        .requestMatchers("/brands/**").hasRole(RoleEnum.ADMIN.name())
                         .anyRequest().authenticated()
         ).formLogin(
                 formLogin -> {
@@ -36,6 +46,13 @@ public class SecurityConfiguration {
                             .logoutUrl("/users/logout")
                             .logoutSuccessUrl("/")
                             .invalidateHttpSession(true);
+                }
+        ).rememberMe(
+                rememberMe -> {
+                    rememberMe
+                            .key(rememberMeKey)
+                            .rememberMeParameter("rememberMe")
+                            .rememberMeCookieName("rememberMe");
                 }
         );
 
