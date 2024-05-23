@@ -5,7 +5,7 @@ function selectYear() {
     const yearSelect = document.querySelector('#year');
     const textOption = yearSelect.querySelector('option');
 
-    let lastSelectedYear = (localStorage.getItem('lastSelectedYear')) || '';
+    let lastSelectedYear = (sessionStorage.getItem('lastSelectedYear')) || '';
 
     if (modelSelect.value !== '') {
         populateYearsList();
@@ -14,7 +14,7 @@ function selectYear() {
 
     modelSelect.addEventListener('change', populateYearsList);
     yearSelect.addEventListener('change', () => {
-        localStorage.setItem('lastSelectedYear', yearSelect.value);
+        sessionStorage.setItem('lastSelectedYear', yearSelect.value);
     });
 
     function populateYearsList() {
