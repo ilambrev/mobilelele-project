@@ -1,15 +1,21 @@
-window.addEventListener("load", app);
+window.addEventListener("load", selectYear);
 
-function app() {
+function selectYear() {
     const modelSelect = document.querySelector('#model');
     const yearSelect = document.querySelector('#year');
     const textOption = yearSelect.querySelector('option');
 
-    if (modelSelect.value !== '' && yearSelect.value === '') {
+    let lastSelectedYear = (localStorage.getItem('lastSelectedYear')) || '';
+
+    if (modelSelect.value !== '') {
         populateYearsList();
+        yearSelect.value = lastSelectedYear;
     }
 
     modelSelect.addEventListener('change', populateYearsList);
+    yearSelect.addEventListener('change', () => {
+        localStorage.setItem('lastSelectedYear', yearSelect.value);
+    });
 
     function populateYearsList() {
         yearSelect.replaceChildren();
