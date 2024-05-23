@@ -30,7 +30,8 @@
                               th:label="${brand.name}">
                         <option  th:each="model : ${brand.models}"
                                  th:value="${model.id}"
-                                 th:text="${model.name}">Model
+                                 th:text="${model.name}"
+                                 th:data-start-end-year="${model.startYear} + '/' + ${model.endYear}">Model
                         </option>
                     </optgroup>
                 </select>
@@ -85,16 +86,32 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-6 mb-3">
-                <label for="year" class="text-white font-weight-bold">Year</label>
-                <input id="year"
-                       th:field="*{year}"
-                       th:errorclass="is-invalid"
-                       type="number" class="form-control" placeholder="Manufacturing year"/>
-                <p th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="invalid-feedback errors alert alert-danger">
-                    Manufacturing year is required.
-                </p>
-            </div>
+<!--            <div class="form-group col-md-6 mb-3">-->
+<!--                <label for="year" class="text-white font-weight-bold">Year</label>-->
+<!--                <input id="year"-->
+<!--                       th:field="*{year}"-->
+<!--                       th:errorclass="is-invalid"-->
+<!--                       type="number" class="form-control" placeholder="Manufacturing year"/>-->
+<!--                <p th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="invalid-feedback errors alert alert-danger">-->
+<!--                    Manufacturing year is required.-->
+<!--                </p>-->
+<!--            </div>-->
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" for="year">Year</label>
+                    <select id="year"
+                            th:field="*{year}"
+                            th:errorclass="is-invalid"
+                            class="form-control">
+                        <option value="">- Select manufacturing year -</option>
+<!--                        <option th:each="y : ${#numbers.sequence(1999,2005)}"-->
+<!--                                th:value="${y}"-->
+<!--                                th:text="${y}">Manufacturing year-->
+<!--                        </option>-->
+                    </select>
+                    <p th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="invalid-feedback errors alert alert-danger">
+                        Manufacturing year is required.
+                    </p>
+                </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="mileage" class="text-white font-weight-bold">Mileage</label>
                 <input id="mileage"
@@ -143,6 +160,8 @@
 <div>
     <footer th:replace="~{fragments/footer :: footer}"></footer>
 </div>
+
+<script type="text/javascript" th:src="@{/js/model-years.js}"></script>
 
 </body>
 
