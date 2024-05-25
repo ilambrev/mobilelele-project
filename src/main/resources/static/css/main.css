@@ -64,6 +64,19 @@ form.main-form {
      padding-top: 8px;
 }
 
+/*Style for Buttons in Offer Detail to implement DELETE method*/
+.form-button {
+     display: inline-block;
+}
+
+.btn-delete {
+     border: none;
+}
+
+.btn-delete:hover {
+     cursor: pointer;
+}
+
 /*Style for img in card to cover whole card*/
 .img-cover {
      width: 100%;

@@ -2,6 +2,7 @@ package bg.softuni.mobileleleproject.service.impl;
 
 import bg.softuni.mobileleleproject.model.dto.OfferCreateDTO;
 import bg.softuni.mobileleleproject.model.dto.OfferDTO;
+import bg.softuni.mobileleleproject.model.dto.OfferEditDTO;
 import bg.softuni.mobileleleproject.model.entity.ModelEntity;
 import bg.softuni.mobileleleproject.model.entity.OfferEntity;
 import bg.softuni.mobileleleproject.model.entity.UserEntity;
@@ -35,43 +36,31 @@ public class OfferServiceImpl implements OfferService {
     public List<OfferDTO> getAllOffers() {
         return this.offerRepository.findAllByOrderByIdDesc()
                 .stream()
-                .map(offer -> new OfferDTO(
-                        offer.getUuid().toString(),
-                        offer.getDescription(),
-                        offer.getEngine().name(),
-                        offer.getImageUrl(),
-                        offer.getMileage(),
-                        offer.getPrice(),
-                        offer.getTransmission().name(),
-                        offer.getYear(),
-                        offer.getCreated(),
-                        offer.getModified(),
-                        offer.getModel().getBrand().getName(),
-                        offer.getModel().getName(),
-                        offer.getSeller().getFirstName() + ' ' + offer.getSeller().getLastName())
-                ).toList();
-
+                .map(this::map)
+                .toList();
     }
 
     @Override
-    public OfferDTO getOfferByUUID(UUID uuid) {
-        OfferEntity offer = this.offerRepository.getByUuid(uuid);
+    public OfferDTO getOfferDTOByUUID(UUID uuid) {
+        OfferEntity offer = getOfferByUUID(uuid);
 
-        return new OfferDTO(
-                offer.getUuid().toString(),
-                offer.getDescription(),
-                offer.getEngine().name(),
-                offer.getImageUrl(),
-                offer.getMileage(),
-                offer.getPrice(),
-                offer.getTransmission().name(),
-                offer.getYear(),
-                offer.getCreated(),
-                offer.getModified(),
-                offer.getModel().getBrand().getName(),
-                offer.getModel().getName(),
-                offer.getSeller().getFirstName() + ' ' + offer.getSeller().getLastName()
-        );
+        return map(offer);
+    }
+
+    @Override
+    public OfferEditDTO getOfferEditDTOByUUID(UUID uuid) {
+        OfferEntity offer = getOfferByUUID(uuid);
+
+        return new OfferEditDTO()
+                .setUuid(offer.getUuid())
+                .setModelId(offer.getModel().getId())
+                .setPrice(offer.getPrice())
+                .setEngine(offer.getEngine())
+                .setTransmission(offer.getTransmission())
+                .setYear(offer.getYear())
+                .setMileage(offer.getMileage())
+                .setDescription(offer.getDescription())
+                .setImageUrl(offer.getImageUrl());
     }
 
     @Override
@@ -95,5 +84,48 @@ public class OfferServiceImpl implements OfferService {
         this.offerRepository.save(offer);
 
         return true;
+    }
+
+    @Override
+    public boolean editOffer(OfferEditDTO offerEditDTO) {
+        OfferEntity offer = getOfferByUUID(offerEditDTO.getUuid());
+        ModelEntity model = this.modelService.getModelById(offerEditDTO.getModelId());
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        offer.setModel(model)
+                .setPrice(offerEditDTO.getPrice())
+                .setEngine(offerEditDTO.getEngine())
+                .setTransmission(offerEditDTO.getTransmission())
+                .setYear(offerEditDTO.getYear())
+                .setMileage(offer.getMileage())
+                .setDescription(offer.getDescription())
+                .setImageUrl(offerEditDTO.getImageUrl())
+                .setModified(currentDateTime);
+
+        this.offerRepository.save(offer);
+
+        return true;
+    }
+
+    private OfferEntity getOfferByUUID(UUID uuid) {
+        return this.offerRepository.getByUuid(uuid);
+    }
+
+    private OfferDTO map(OfferEntity offer) {
+        return new OfferDTO()
+                .setUuid(offer.getUuid().toString())
+                .setDescription(offer.getDescription())
+                .setEngine(offer.getEngine().name())
+                .setImageUrl(offer.getImageUrl())
+                .setMileage(offer.getMileage())
+                .setPrice(offer.getPrice())
+                .setTransmission(offer.getTransmission().name())
+                .setYear(offer.getYear())
+                .setCreated(offer.getCreated())
+                .setModified(offer.getModified())
+                .setBrand(offer.getModel().getBrand().getName())
+                .setModel(offer.getModel().getName())
+                .setSeller(offer.getSeller().getFirstName() + ' ' + offer.getSeller().getLastName())
+                .setSellerEmail(offer.getSeller().getEmail());
     }
 }

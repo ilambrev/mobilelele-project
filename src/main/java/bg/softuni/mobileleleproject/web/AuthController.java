@@ -26,7 +26,6 @@ public class AuthController {
 
     @GetMapping("/register")
     public String getRegistrationForm(Model model) {
-
         if (!model.containsAttribute("userRegistrationDTO")) {
             model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
         }

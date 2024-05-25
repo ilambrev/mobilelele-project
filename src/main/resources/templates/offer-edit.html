@@ -12,11 +12,12 @@
 </div>
 
 <div class="container">
-    <h2 class="text-center text-white">Upload Offer</h2>
+    <h2 class="text-center text-white">Edit Offer</h2>
     <form th:method="POST"
-          th:action="@{/offer/add}"
-          th:object="${offerCreateDTO}"
+          th:action="@{/offer/edit/{uuid} (uuid=${uuid})}"
+          th:object="${offerEditDTO}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <input type="hidden" name="_method" value="patch" />
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" for="model">Model</label>
@@ -40,7 +41,6 @@
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="price" class="text-white font-weight-bold">Price</label>
-<!--                <input id="price" type="number" min="0" step="100" class="form-control"-->
                 <input id="price"
                        th:field="*{price}"
                        th:errorclass="is-invalid"
@@ -85,19 +85,9 @@
             </div>
         </div>
         <div class="row">
-<!--            <div class="form-group col-md-6 mb-3">-->
-<!--                <label for="year" class="text-white font-weight-bold">Year</label>-->
-<!--                <input id="year"-->
-<!--                       th:field="*{year}"-->
-<!--                       th:errorclass="is-invalid"-->
-<!--                       type="number" class="form-control" placeholder="Manufacturing year"/>-->
-<!--                <p th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="invalid-feedback errors alert alert-danger">-->
-<!--                    Manufacturing year is required.-->
-<!--                </p>-->
-<!--            </div>-->
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center text-white font-weight-bold" for="year">Year</label>
-                    <select id="year"
+                    <select id="year" th:data-selected-year="*{year}"
                             th:field="*{year}"
                             th:errorclass="is-invalid"
                             class="form-control">

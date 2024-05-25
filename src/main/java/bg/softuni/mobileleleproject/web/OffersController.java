@@ -1,6 +1,5 @@
 package bg.softuni.mobileleleproject.web;
 
-import bg.softuni.mobileleleproject.service.BrandService;
 import bg.softuni.mobileleleproject.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,12 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OffersController {
 
     private final OfferService offerService;
-    private final BrandService brandService;
 
     @Autowired
-    public OffersController(OfferService offerService, BrandService brandService) {
+    public OffersController(OfferService offerService) {
         this.offerService = offerService;
-        this.brandService = brandService;
     }
 
     @GetMapping("/all")
@@ -28,5 +25,4 @@ public class OffersController {
 
         return ("offers");
     }
-
 }

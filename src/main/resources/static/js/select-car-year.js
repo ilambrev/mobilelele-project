@@ -5,7 +5,13 @@ function selectYear() {
     const yearSelect = document.querySelector('#year');
     const textOption = yearSelect.querySelector('option');
 
-    let lastSelectedYear = (sessionStorage.getItem('lastSelectedYear')) || '';
+    let lastSelectedYear;
+
+    if (yearSelect.getAttribute('data-selected-year')) {
+        lastSelectedYear = yearSelect.getAttribute('data-selected-year') || sessionStorage.getItem('lastSelectedYear');
+    } else {
+        lastSelectedYear = sessionStorage.getItem('lastSelectedYear') || '';
+    }
 
     if (modelSelect.value !== '') {
         populateYearsList();

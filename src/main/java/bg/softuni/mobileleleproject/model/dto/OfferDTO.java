@@ -31,26 +31,10 @@ public class OfferDTO {
 
     private String seller;
 
+    private String sellerEmail;
+
     public OfferDTO() {
 
-    }
-
-    public OfferDTO(String uuid, String description, String engine, String imageUrl, Integer mileage,
-                    BigDecimal price, String transmission, Integer year, LocalDateTime created,
-                    LocalDateTime modified, String brand, String model, String seller) {
-        this.uuid = uuid;
-        this.description = description;
-        this.engine = engine;
-        this.imageUrl = imageUrl;
-        this.mileage = mileage;
-        this.price = price;
-        this.transmission = transmission;
-        this.year = year;
-        this.created = created;
-        this.modified = modified;
-        this.brand = brand;
-        this.model = model;
-        this.seller = seller;
     }
 
     public String getUuid() {
@@ -170,4 +154,12 @@ public class OfferDTO {
         return this;
     }
 
+    public String getSellerEmail() {
+        return sellerEmail;
+    }
+
+    public OfferDTO setSellerEmail(String sellerEmail) {
+        this.sellerEmail = sellerEmail;
+        return this;
+    }
 }

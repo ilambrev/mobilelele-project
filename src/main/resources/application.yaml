@@ -21,6 +21,7 @@ spring:
         init:
             mode: never
 #            mode: always
+
 logging:
     level:
 # For Spring Boot 3
@@ -30,7 +31,7 @@ logging:
 #      org.hibernate.stat: DEBUG
       org.hibernate:sql: DEBUG
 #      org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-      org.springframework.security: TRACE
+#      org.springframework.security: TRACE
 
 mobilelele:
     remember.me.key: ${REMEMBER_ME_KEY}

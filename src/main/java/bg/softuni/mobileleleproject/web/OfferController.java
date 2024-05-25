@@ -1,6 +1,7 @@
 package bg.softuni.mobileleleproject.web;
 
 import bg.softuni.mobileleleproject.model.dto.OfferCreateDTO;
+import bg.softuni.mobileleleproject.model.dto.OfferEditDTO;
 import bg.softuni.mobileleleproject.model.enums.EngineEnum;
 import bg.softuni.mobileleleproject.model.enums.TransmissionEnum;
 import bg.softuni.mobileleleproject.service.BrandService;
@@ -12,10 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.UUID;
@@ -33,33 +31,17 @@ public class OfferController {
         this.brandService = brandService;
     }
 
-
-    @GetMapping("/details/{uuid}")
-    public String offerDetails(@PathVariable("uuid") UUID uuid,
-                                  Model model) {
-
-        model.addAttribute("offer", this.offerService.getOfferByUUID(uuid));
-
-        return "details";
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        model.addAttribute("brands", this.brandService.getAllBrands());
+        model.addAttribute("engineTypes", EngineEnum.values());
+        model.addAttribute("transmissionTypes", TransmissionEnum.values());
     }
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
-
         if (!model.containsAttribute("offerCreateDTO")) {
             model.addAttribute("offerCreateDTO", new OfferCreateDTO());
-        }
-
-        if (!model.containsAttribute("brands")) {
-            model.addAttribute("brands", this.brandService.getAllBrands());
-        }
-
-        if (!model.containsAttribute("engineTypes")) {
-            model.addAttribute("engineTypes", EngineEnum.values());
-        }
-
-        if (!model.containsAttribute("transmissionTypes")) {
-            model.addAttribute("transmissionTypes", TransmissionEnum.values());
         }
 
         return "offer-add";
@@ -81,5 +63,38 @@ public class OfferController {
         }
 
         return "redirect:/offers/all";
+    }
+
+    @GetMapping("/details/{uuid}")
+    public String offerDetails(@PathVariable("uuid") UUID uuid, Model model) {
+        model.addAttribute("offer", this.offerService.getOfferDTOByUUID(uuid));
+
+        return "details";
+    }
+
+    @GetMapping("/edit/{uuid}")
+    public String offerEdit(@PathVariable("uuid") UUID uuid, Model model) {
+        if (!model.containsAttribute("offerEditDTO")) {
+            model.addAttribute("offerEditDTO", this.offerService.getOfferEditDTOByUUID(uuid));
+        }
+
+        return "offer-edit";
+    }
+
+    @PatchMapping("/edit/{uuid}")
+    public String offerEdit(@PathVariable("uuid") UUID uuid,
+                            @Valid OfferEditDTO offerEditDTO,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors() || !this.offerService.editOffer(offerEditDTO)) {
+            redirectAttributes.addFlashAttribute("offerEditDTO", offerEditDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.offerEditDTO", bindingResult);
+
+            return "redirect:/offer/edit/{uuid}";
+        }
+
+
+        return "redirect:/offer/details/{uuid}";
     }
 }

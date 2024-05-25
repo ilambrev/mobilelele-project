@@ -16,33 +16,42 @@
 <div class="container-fluid">
     <h2 class="text-center text-white mt-5">Details</h2>
     <div class="offers row mx-auto d-flex flex-row justify-content-center">
-        <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
+        <div class="offer card col-sm-2 col-md-3 col-lg-4 m-1 p-0">
 
             <div class="card-body pb-1">
                 <h5 class="card-title"
-                    th:text="${offer.getBrand()} + ' ' + ${offer.getModel()} + ' - ' + ${offer.getYear()}"
+                    th:text="${offer.brand} + ' ' + ${offer.model} + ' - ' + ${offer.year}"
                 >
                     Offer year Brand name Model name</h5>
             </div>
             <ul class="offer-details list-group list-group-flush">
                 <li class="list-group-item">
-                    <div class="card-text"><span th:text="'• Mileage - ' + ${offer.getMileage()}">• Mileage</span></div>
-                    <div class="card-text"><span th:text="'• Price - ' + ${offer.getPrice()}">• Price</span></div>
-                    <div class="card-text"><span th:text="'• Engine type - ' + ${offer.getEngine()}">• Engine type</span></div>
-                    <div class="card-text"><span th:text="'• Transmission type - ' + ${offer.getTransmission()}">• Transmission type</span></div>
-                    <div class="card-text"><span th:text="'• Offer created - ' + ${#temporals.format(offer.getCreated(), 'dd.MM.yyyy HH:mm')}">• Offer created</span></div>
-                    <div class="card-text"><span th:text="'• Offer modified - ' + ${#temporals.format(offer.getModified(), 'dd.MM.yyyy HH:mm')}">• Offer modified</span></div>
-                    <div class="card-text"><span th:text="'• Seller - ' + ${offer.getSeller()}">• Seller - First and Last name</span></div>
+                    <div class="card-text"><span th:text="'• Mileage - ' + ${offer.mileage}">• Mileage</span></div>
+                    <div class="card-text"><span th:text="'• Price - ' + ${offer.price}">• Price</span></div>
+                    <div class="card-text"><span th:text="'• Engine type - ' + ${offer.engine}">• Engine type</span></div>
+                    <div class="card-text"><span th:text="'• Transmission type - ' + ${offer.transmission}">• Transmission type</span></div>
+                    <div class="card-text"><span th:text="'• Offer created - ' + ${#temporals.format(offer.created, 'dd.MM.yyyy HH:mm')}">• Offer created</span></div>
+                    <div class="card-text"><span th:text="'• Offer modified - ' + ${#temporals.format(offer.modified, 'dd.MM.yyyy HH:mm')}">• Offer modified</span></div>
+                    <div class="card-text"><span th:text="'• Seller - ' + ${offer.seller}">• Seller - First and Last name</span></div>
                 </li>
             </ul>
             <div class="card-body">
-                <a class="card-link" sec:authorize="hasRole('ADMIN')" href="/">Update</a>
-                <a class="card-link" sec:authorize="hasRole('ADMIN')" href="/">Delete</a>
+                <a class="card-link"
+                   th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')} or ${offer.sellerEmail} == ${#authentication.name}"
+                   th:href="@{/offer/edit/{uuid} (uuid=${offer.uuid})}">Update</a>
+                <form class="form-button"
+                      th:action="@{/offer/delete/{uuid} (uuid=${offer.uuid})}"
+                      th:method="POST"
+                      th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')} or ${offer.sellerEmail} == ${#authentication.name}">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" class="card-link btn-link btn-delete">Delete</button>
+                </form>
+<!--                <a class="card-link" href="/">Delete</a>-->
             </div>
         </div>
-        <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
+        <div class="offer card col-sm-2 col-md-3 col-lg-4 m-1 p-0">
             <!--<img th:src="@{${offer.getImageUrl()}}" class="card-img-top" alt="Car image">-->
-            <img th:src="@{${offer.getImageUrl()}}" class="card-img-top img-cover" alt="Car image">
+            <img th:src="@{${offer.imageUrl}}" class="card-img-top img-cover" alt="Car image">
 
         </div>
     </div>
