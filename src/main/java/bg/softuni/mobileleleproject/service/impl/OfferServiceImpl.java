@@ -107,6 +107,11 @@ public class OfferServiceImpl implements OfferService {
         return true;
     }
 
+    @Override
+    public void deleteOffer(UUID uuid) {
+        this.offerRepository.delete(getOfferByUUID(uuid));
+    }
+
     private OfferEntity getOfferByUUID(UUID uuid) {
         return this.offerRepository.getByUuid(uuid);
     }

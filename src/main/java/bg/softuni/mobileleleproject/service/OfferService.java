@@ -19,4 +19,6 @@ public interface OfferService {
     boolean addOffer(OfferCreateDTO offerCreateDTO, UserDetails currentUser);
 
     boolean editOffer(OfferEditDTO offerEditDTO);
+
+    void deleteOffer(UUID uuid);
 }

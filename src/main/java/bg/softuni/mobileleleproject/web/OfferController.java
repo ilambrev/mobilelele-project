@@ -82,7 +82,7 @@ public class OfferController {
     }
 
     @PatchMapping("/edit/{uuid}")
-    public String offerEdit(@PathVariable("uuid") UUID uuid,
+    public String editOffer(@PathVariable("uuid") UUID uuid,
                             @Valid OfferEditDTO offerEditDTO,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes) {
@@ -96,5 +96,12 @@ public class OfferController {
 
 
         return "redirect:/offer/details/{uuid}";
+    }
+
+    @DeleteMapping("/delete/{uuid}")
+    public String deleteOffer(@PathVariable("uuid") UUID uuid) {
+        this.offerService.deleteOffer(uuid);
+
+        return "redirect:/offers/all";
     }
 }
