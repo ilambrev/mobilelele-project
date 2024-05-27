@@ -3,7 +3,7 @@ package bg.softuni.mobileleleproject.config;
 import bg.softuni.mobileleleproject.model.enums.RoleEnum;
 import bg.softuni.mobileleleproject.repository.UserRepository;
 import bg.softuni.mobileleleproject.service.impl.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +16,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfiguration {
 
-    private final String rememberMeKey;
+    private final PropertiesConfiguration propertiesConfiguration;
 
-    public SecurityConfiguration(@Value("${mobilelele.remember.me.key}") String rememberMeKey) {
-        this.rememberMeKey = rememberMeKey;
+    @Autowired
+    public SecurityConfiguration(PropertiesConfiguration propertiesConfiguration) {
+        this.propertiesConfiguration = propertiesConfiguration;
     }
 
     @Bean
@@ -31,29 +32,20 @@ public class SecurityConfiguration {
                         .requestMatchers("/offers/all", "/offer/details/**").permitAll()
                         .requestMatchers("/brands/**").hasRole(RoleEnum.ADMIN.name())
                         .anyRequest().authenticated()
-        ).formLogin(
-                formLogin -> {
-                    formLogin
-                            .loginPage("/users/login")
-                            .usernameParameter("email")
-                            .passwordParameter("password")
-                            .defaultSuccessUrl("/")
-                            .failureForwardUrl("/users/login-error");
-                }
-        ).logout(
-                logout -> {
-                    logout
-                            .logoutUrl("/users/logout")
-                            .logoutSuccessUrl("/")
-                            .invalidateHttpSession(true);
-                }
-        ).rememberMe(
-                rememberMe -> {
-                    rememberMe
-                            .key(rememberMeKey)
-                            .rememberMeParameter("rememberMe")
-                            .rememberMeCookieName("rememberMe");
-                }
+        ).formLogin(formLogin -> formLogin
+                .loginPage("/users/login")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/")
+                .failureForwardUrl("/users/login-error")
+        ).logout(logout -> logout
+                .logoutUrl("/users/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+        ).rememberMe(rememberMe -> rememberMe
+                .key(propertiesConfiguration.getRememberMeKey())
+                .rememberMeParameter("rememberMe")
+                .rememberMeCookieName("rememberMe")
         );
 
         return httpSecurity.build();

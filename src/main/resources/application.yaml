@@ -34,4 +34,5 @@ logging:
 #      org.springframework.security: TRACE
 
 mobilelele:
-    remember.me.key: ${REMEMBER_ME_KEY}
+    env:
+        remember-me-key: ${REMEMBER_ME_KEY}
