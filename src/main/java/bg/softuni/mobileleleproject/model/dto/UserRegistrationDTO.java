@@ -85,4 +85,7 @@ public class UserRegistrationDTO {
         return this;
     }
 
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
+    }
 }

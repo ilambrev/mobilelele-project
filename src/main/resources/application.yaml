@@ -34,5 +34,11 @@ logging:
 #      org.springframework.security: TRACE
 
 mobilelele:
-    env:
+    auth:
         remember-me-key: ${REMEMBER_ME_KEY}
+    mail:
+        host: localhost
+        port: 1025
+        username: ${MAIL_USERNAME}
+        password: ${MAIL_PASSWORD}
+        mobilelele-mail: mobilelele@mobilelele.bg
