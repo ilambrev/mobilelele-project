@@ -4,8 +4,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties("mobilelele.env")
-public class PropertiesConfiguration {
+@ConfigurationProperties(prefix = "mobilelele.auth")
+public class AuthPropertiesConfiguration {
 
     private String rememberMeKey;
 
@@ -13,7 +13,7 @@ public class PropertiesConfiguration {
         return rememberMeKey;
     }
 
-    public PropertiesConfiguration setRememberMeKey(String rememberMeKey) {
+    public AuthPropertiesConfiguration setRememberMeKey(String rememberMeKey) {
         this.rememberMeKey = rememberMeKey;
         return this;
     }

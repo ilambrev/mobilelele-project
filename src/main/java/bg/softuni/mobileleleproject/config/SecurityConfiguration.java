@@ -16,11 +16,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfiguration {
 
-    private final PropertiesConfiguration propertiesConfiguration;
+    private final AuthPropertiesConfiguration authPropertiesConfiguration;
 
     @Autowired
-    public SecurityConfiguration(PropertiesConfiguration propertiesConfiguration) {
-        this.propertiesConfiguration = propertiesConfiguration;
+    public SecurityConfiguration(AuthPropertiesConfiguration authPropertiesConfiguration) {
+        this.authPropertiesConfiguration = authPropertiesConfiguration;
     }
 
     @Bean
@@ -43,7 +43,7 @@ public class SecurityConfiguration {
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
         ).rememberMe(rememberMe -> rememberMe
-                .key(propertiesConfiguration.getRememberMeKey())
+                .key(authPropertiesConfiguration.getRememberMeKey())
                 .rememberMeParameter("rememberMe")
                 .rememberMeCookieName("rememberMe")
         );
