@@ -24,7 +24,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void sendRegistrationEmail(String userEmail, String userName) {
+    public void sendRegistrationEmail(String userEmail, String userName, String activationCode) {
         MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
 
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
@@ -34,7 +34,7 @@ public class EmailServiceImpl implements EmailService {
             mimeMessageHelper.setFrom(this.mailConfiguration.getMobileleleMail());
             mimeMessageHelper.setReplyTo(this.mailConfiguration.getMobileleleMail());
             mimeMessageHelper.setSubject("Welcome to Mobilelele!");
-            mimeMessageHelper.setText(generateRegistrationEmailBody(userName), true);
+            mimeMessageHelper.setText(generateRegistrationEmailBody(userName, activationCode), true);
 
             this.javaMailSender.send(mimeMessageHelper.getMimeMessage());
         } catch (MessagingException e) {
@@ -42,10 +42,11 @@ public class EmailServiceImpl implements EmailService {
         }
     }
 
-    private String generateRegistrationEmailBody(String userName) {
+    private String generateRegistrationEmailBody(String userName, String activationCode) {
         Context context = new Context();
 
         context.setVariable("username", userName);
+        context.setVariable("activationCode", activationCode);
 
         return this.templateEngine.process("email/registration-email", context);
     }
