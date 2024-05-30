@@ -5,7 +5,7 @@ import bg.softuni.mobileleleproject.model.entity.UserEntity;
 
 public interface UserService {
 
-    Boolean registerUser(UserRegistrationDTO userRegistrationDTO);
+    Boolean registerUser(UserRegistrationDTO userRegistrationDTO, String appURL);
 
     UserEntity getUserById(Long id);
 

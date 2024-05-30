@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean registerUser(UserRegistrationDTO userRegistrationDTO) {
+    public Boolean registerUser(UserRegistrationDTO userRegistrationDTO, String appURL) {
 
         UserEntity user = new UserEntity()
                 .setEmail(userRegistrationDTO.getEmail().toLowerCase(Locale.ENGLISH))
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         this.userRepository.save(user);
 
         this.applicationEventPublisher.publishEvent(new UserRegisteredEvent("UserService",
-                userRegistrationDTO.getEmail(), userRegistrationDTO.getFullName()));
+                userRegistrationDTO.getEmail(), userRegistrationDTO.getFullName(), appURL));
 
         return true;
     }

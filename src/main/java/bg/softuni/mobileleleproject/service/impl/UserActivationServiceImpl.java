@@ -35,7 +35,7 @@ public class UserActivationServiceImpl implements UserActivationService {
     public void userRegistered(UserRegisteredEvent event) {
         String activationCode = createActivationCode(event.getUserEmail());
 
-        this.emailService.sendRegistrationEmail(event.getUserEmail(), event.getUserName(), activationCode);
+        this.emailService.sendRegistrationEmail(event.getUserEmail(), event.getUserName(), event.getAppURL(), activationCode);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class UserActivationServiceImpl implements UserActivationService {
 
         for (int i = 0; i < ACTIVATION_CODE_LENGTH; i++) {
             int randIndex = random.nextInt(ACTIVATION_CODE_SYMBOLS.length());
-            activationCode.append(ACTIVATION_CODE_SYMBOLS.charAt(randIndex - 1));
+            activationCode.append(ACTIVATION_CODE_SYMBOLS.charAt(randIndex));
         }
 
         return activationCode.toString();

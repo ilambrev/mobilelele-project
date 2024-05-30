@@ -2,6 +2,7 @@ package bg.softuni.mobileleleproject.web;
 
 import bg.softuni.mobileleleproject.model.dto.UserRegistrationDTO;
 import bg.softuni.mobileleleproject.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,9 +37,12 @@ public class AuthController {
     @PostMapping("/register")
     public String registration(@Valid UserRegistrationDTO userRegistrationDTO,
                                BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes) {
+                               RedirectAttributes redirectAttributes,
+                               HttpServletRequest request) {
 
-        if (bindingResult.hasErrors() || !this.userService.registerUser(userRegistrationDTO)) {
+        String appUrl = request.getRequestURL().toString().replace(request.getRequestURI(), "");
+
+        if (bindingResult.hasErrors() || !this.userService.registerUser(userRegistrationDTO, appUrl)) {
             redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
 

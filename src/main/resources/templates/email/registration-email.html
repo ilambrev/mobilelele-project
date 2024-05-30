@@ -15,7 +15,7 @@
     <h1>Hello, <th:block th:text="${username}">John Doe</th:block>!</h1>
     <p>Thank you for creating your Mobilelele Account.</p>
     <p>To complete your registration, click the link below: </p>
-    <p><a th:href="@{http://localhost:8080/users/activate(activation_code=*{activationCode})}">Confirm your account</a></p>
+    <p><a th:href="@{*{activationURL}(activation_code=*{activationCode})}">Confirm your account</a></p>
 </body>
 
 </html>
