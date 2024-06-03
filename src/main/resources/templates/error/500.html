@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}">
+    <title>MobiLeLeLe</title>
+</head>
+
+<body class="app-error">
+
+    <div>
+        <nav th:replace="~{fragments/navigation :: navigation}"></nav>
+    </div>
+
+    <div class="container-fluid">
+        <h1 class="text-center text-white mt-5">Oops!</h1>
+        <h5 class="text-center text-white mt-3">Something went wrong!</h5>
+        <h5 class="text-center text-white mt-3">We are sorry! We are working to resolve the problem!</h5>
+        <img class="app-error-img mt-5" th:src="@{/images/broken-car.png}" alt="Broken Car">
+    </div>
+
+    <div class="container-fluid"></div>
+
+    <div>
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
+    </div>
+
+</body>
+
+</html>

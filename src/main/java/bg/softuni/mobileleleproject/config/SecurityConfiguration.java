@@ -28,8 +28,9 @@ public class SecurityConfiguration {
         httpSecurity.authorizeHttpRequests(
                 authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/users/login", "users/register", "/users/login-error").permitAll()
+                        .requestMatchers("/", "/users/login", "/users/login-error", "users/register", "/users/activate").permitAll()
                         .requestMatchers("/offers/all", "/offer/details/**").permitAll()
+                        .requestMatchers("/error").permitAll()
                         .requestMatchers("/brands/**").hasRole(RoleEnum.ADMIN.name())
                         .anyRequest().authenticated()
         ).formLogin(formLogin -> formLogin

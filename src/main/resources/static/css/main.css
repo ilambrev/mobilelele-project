@@ -7,6 +7,16 @@ body {
      background-color: #464646;
  }
 
+.app-error {
+     background-image: none;
+}
+
+.app-error-img {
+     display: block;
+     width: 50%;
+     margin: auto;
+}
+
 .navbar .logo {
      max-height: 50px;
      padding-right: 100px;
