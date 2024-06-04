@@ -1,5 +1,6 @@
 package bg.softuni.mobileleleproject.service.impl;
 
+import bg.softuni.mobileleleproject.exceptions.OfferNotFoundException;
 import bg.softuni.mobileleleproject.model.dto.OfferCreateDTO;
 import bg.softuni.mobileleleproject.model.dto.OfferDTO;
 import bg.softuni.mobileleleproject.model.dto.OfferEditDTO;
@@ -113,7 +114,8 @@ public class OfferServiceImpl implements OfferService {
     }
 
     private OfferEntity getOfferByUUID(UUID uuid) {
-        return this.offerRepository.getByUuid(uuid);
+        return this.offerRepository.getByUuid(uuid)
+                .orElseThrow(() -> new OfferNotFoundException("Offer with id: " + uuid + " not found!"));
     }
 
     private OfferDTO map(OfferEntity offer) {

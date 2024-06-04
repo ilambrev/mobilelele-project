@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}">
+    <title>MobiLeLeLe</title>
+</head>
+
+<body class="app-error">
+
+    <div>
+        <nav th:replace="~{fragments/navigation :: navigation}"></nav>
+    </div>
+
+    <div class="container-fluid">
+        <h1 class="text-center text-white mt-5">Sorry</h1>
+        <h5 class="text-center text-white mt-3">We couldn't find that page!</h5>
+        <h5 class="text-center text-white mt-3">The link you followed may be broken, or the page may have been removed.</h5>
+        <a class="nav-link text-warning text-center" th:href="@{/}">Go to homepage</a>
+        <img class="app-error-img mt-5" th:src="@{/images/broken-car.png}" alt="Broken Car">
+    </div>
+
+    <div class="container-fluid"></div>
+
+    <div>
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
+    </div>
+
+</body>
+
+</html>
