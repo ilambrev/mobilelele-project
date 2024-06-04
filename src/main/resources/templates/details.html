@@ -33,17 +33,18 @@
                     <div class="card-text"><span th:text="'• Offer created - ' + ${#temporals.format(offer.created, 'dd.MM.yyyy HH:mm')}">• Offer created</span></div>
                     <div class="card-text"><span th:text="'• Offer modified - ' + ${#temporals.format(offer.modified, 'dd.MM.yyyy HH:mm')}">• Offer modified</span></div>
                     <div class="card-text"><span th:text="'• Seller - ' + ${offer.seller}">• Seller - First and Last name</span></div>
+                    <div class="card-text"><span th:text="'• Description - ' + ${offer.description}">• Description</span></div>
                 </li>
             </ul>
             <div class="card-body">
                 <a class="card-link"
                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')} or ${offer.sellerEmail} == ${#authentication.name}"
-                   th:href="@{/offer/edit/{uuid} (uuid=${offer.uuid})}">Update</a>
+                   th:href="@{/offer/edit/{uuid} (uuid=${offer.uuid})}"
+                   th:method="GET">Update</a>
                 <form class="form-button"
+                      th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')} or ${offer.sellerEmail} == ${#authentication.name}"
                       th:action="@{/offer/delete/{uuid} (uuid=${offer.uuid})}"
-                      th:method="POST"
-                      th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')} or ${offer.sellerEmail} == ${#authentication.name}">
-                    <input type="hidden" name="_method" value="delete" />
+                      th:method="DELETE">
                     <button type="submit" class="card-link btn-link btn-delete">Delete</button>
                 </form>
 <!--                <a class="card-link" href="/">Delete</a>-->
