@@ -73,7 +73,7 @@ public class OfferController {
     }
 
     @GetMapping("/edit/{uuid}")
-    public String offerEdit(@PathVariable("uuid") UUID uuid, Model model) {
+    public String editOffer(@PathVariable("uuid") UUID uuid, Model model) {
         if (!model.containsAttribute("offerEditDTO")) {
             model.addAttribute("offerEditDTO", this.offerService.getOfferEditDTOByUUID(uuid));
         }
