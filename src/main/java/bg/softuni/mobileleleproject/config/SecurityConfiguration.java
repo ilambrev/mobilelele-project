@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,7 +30,8 @@ public class SecurityConfiguration {
                 authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/users/login", "/users/login-error", "users/register", "/users/activate").permitAll()
-                        .requestMatchers("/offers/all", "/offer/details/**").permitAll()
+                        .requestMatchers("/offers/all").permitAll()
+                        .requestMatchers(HttpMethod.GET, "offer/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/brands/**").hasRole(RoleEnum.ADMIN.name())
                         .anyRequest().authenticated()
