@@ -98,8 +98,8 @@ public class OfferServiceImpl implements OfferService {
                 .setEngine(offerEditDTO.getEngine())
                 .setTransmission(offerEditDTO.getTransmission())
                 .setYear(offerEditDTO.getYear())
-                .setMileage(offer.getMileage())
-                .setDescription(offer.getDescription())
+                .setMileage(offerEditDTO.getMileage())
+                .setDescription(offerEditDTO.getDescription())
                 .setImageUrl(offerEditDTO.getImageUrl())
                 .setModified(currentDateTime);
 
