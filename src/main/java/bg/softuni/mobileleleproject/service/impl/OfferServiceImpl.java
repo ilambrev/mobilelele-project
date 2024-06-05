@@ -1,6 +1,6 @@
 package bg.softuni.mobileleleproject.service.impl;
 
-import bg.softuni.mobileleleproject.exceptions.OfferNotFoundException;
+import bg.softuni.mobileleleproject.exception.OfferNotFoundException;
 import bg.softuni.mobileleleproject.model.dto.OfferCreateDTO;
 import bg.softuni.mobileleleproject.model.dto.OfferDTO;
 import bg.softuni.mobileleleproject.model.dto.OfferEditDTO;

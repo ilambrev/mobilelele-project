@@ -1,6 +1,6 @@
 package bg.softuni.mobileleleproject.service.impl;
 
-import bg.softuni.mobileleleproject.exceptions.UserNotFoundException;
+import bg.softuni.mobileleleproject.exception.UserNotFoundException;
 import bg.softuni.mobileleleproject.model.dto.UserRegistrationDTO;
 import bg.softuni.mobileleleproject.model.entity.UserEntity;
 import bg.softuni.mobileleleproject.model.events.UserRegisteredEvent;

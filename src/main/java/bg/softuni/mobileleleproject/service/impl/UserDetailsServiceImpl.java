@@ -1,6 +1,6 @@
 package bg.softuni.mobileleleproject.service.impl;
 
-import bg.softuni.mobileleleproject.exceptions.UserNotFoundException;
+import bg.softuni.mobileleleproject.exception.UserNotFoundException;
 import bg.softuni.mobileleleproject.model.entity.UserEntity;
 import bg.softuni.mobileleleproject.model.entity.UserRoleEntity;
 import bg.softuni.mobileleleproject.repository.UserRepository;
@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return this.userRepository
                 .findByEmail(email)
                 .map(UserDetailsServiceImpl::map)
-                .orElseThrow(() -> new UserNotFoundException("User " + email + " not found!"));
+                .orElseThrow(() -> new UsernameNotFoundException("User " + email + " not found!"));
     }
 
     private static UserDetails map(UserEntity userEntity) {

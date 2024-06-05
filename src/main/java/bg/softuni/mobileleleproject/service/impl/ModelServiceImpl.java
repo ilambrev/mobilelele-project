@@ -1,6 +1,6 @@
 package bg.softuni.mobileleleproject.service.impl;
 
-import bg.softuni.mobileleleproject.exceptions.ModelNotFoundException;
+import bg.softuni.mobileleleproject.exception.ModelNotFoundException;
 import bg.softuni.mobileleleproject.model.entity.ModelEntity;
 import bg.softuni.mobileleleproject.repository.ModelRepository;
 import bg.softuni.mobileleleproject.service.ModelService;
