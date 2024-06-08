@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    url: jdbc:hsqldb:mem:test_db;sql.syntax_mys=true;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+  sql:
+      init:
+        mode: never
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+logging:
+  level:
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.hibernate:sql: DEBUG
+
+mobilelele:
+  auth:
+    remember-me-key: test
+  mail:
+    host: localhost
+    port: 1025
+    username: test
+    password: test
+    mobilelele-mail: mobilelele@mobilelele.bg
