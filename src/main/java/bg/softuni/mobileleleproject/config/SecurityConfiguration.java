@@ -29,7 +29,7 @@ public class SecurityConfiguration {
         httpSecurity.authorizeHttpRequests(
                 authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/users/login", "/users/login-error", "users/register", "/users/activate").permitAll()
+                        .requestMatchers("/", "/users/login", "/users/login-error", "/users/register", "/users/activate").permitAll()
                         .requestMatchers("/offers/all").permitAll()
                         .requestMatchers(HttpMethod.GET, "offer/**").permitAll()
                         .requestMatchers("/error").permitAll()
