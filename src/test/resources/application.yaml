@@ -27,7 +27,7 @@ mobilelele:
     remember-me-key: test
   mail:
     host: localhost
-    port: 1025
-    username: test
+    port: 3333
+    username: test@mobilelele.bg
     password: test
     mobilelele-mail: mobilelele@mobilelele.bg
