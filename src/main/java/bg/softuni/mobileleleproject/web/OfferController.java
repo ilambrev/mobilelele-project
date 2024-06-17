@@ -73,8 +73,11 @@ public class OfferController {
         return "details";
     }
 
+    @PreAuthorize(value = "@offerServiceImpl.isOwner(#uuid, #principal.username)")
     @GetMapping("/edit/{uuid}")
-    public String editOffer(@PathVariable("uuid") UUID uuid, Model model) {
+    public String editOffer(@PathVariable("uuid") UUID uuid,
+                            Model model,
+                            @AuthenticationPrincipal UserDetails principal) {
         if (!model.containsAttribute("offerEditDTO")) {
             model.addAttribute("offerEditDTO", this.offerService.getOfferEditDTOByUUID(uuid));
         }
@@ -82,11 +85,13 @@ public class OfferController {
         return "offer-edit";
     }
 
+    @PreAuthorize(value = "@offerServiceImpl.isOwner(#uuid, #principal.username)")
     @PatchMapping("/edit/{uuid}")
     public String editOffer(@PathVariable("uuid") UUID uuid,
                             @Valid OfferEditDTO offerEditDTO,
                             BindingResult bindingResult,
-                            RedirectAttributes redirectAttributes) {
+                            RedirectAttributes redirectAttributes,
+                            @AuthenticationPrincipal UserDetails principal) {
 
         if (bindingResult.hasErrors() || !this.offerService.editOffer(offerEditDTO)) {
             redirectAttributes.addFlashAttribute("offerEditDTO", offerEditDTO);
