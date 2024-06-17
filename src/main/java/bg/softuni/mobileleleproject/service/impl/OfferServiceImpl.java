@@ -113,8 +113,23 @@ public class OfferServiceImpl implements OfferService {
         this.offerRepository.delete(getOfferByUUID(uuid));
     }
 
+    @Override
+    public boolean isOwner(UUID uuid, String username) {
+        if (username == null) {
+            return false;
+        }
+
+        OfferEntity offerEntity = this.offerRepository.findByUuid(uuid).orElse(null);
+
+        if (offerEntity == null) {
+            return false;
+        }
+
+        return offerEntity.getSeller().getEmail().equals(username);
+    }
+
     private OfferEntity getOfferByUUID(UUID uuid) {
-        return this.offerRepository.getByUuid(uuid)
+        return this.offerRepository.findByUuid(uuid)
                 .orElseThrow(() -> new OfferNotFoundException("Offer with id: " + uuid + " not found!"));
     }
 

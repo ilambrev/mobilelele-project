@@ -21,4 +21,6 @@ public interface OfferService {
     boolean editOffer(OfferEditDTO offerEditDTO);
 
     void deleteOffer(UUID uuid);
+
+    boolean isOwner(UUID uuid, String username);
 }

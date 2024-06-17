@@ -8,6 +8,7 @@ import bg.softuni.mobileleleproject.service.BrandService;
 import bg.softuni.mobileleleproject.service.OfferService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -98,8 +99,10 @@ public class OfferController {
         return "redirect:/offer/details/{uuid}";
     }
 
+    @PreAuthorize(value = "@offerServiceImpl.isOwner(#uuid, #principal.username)")
     @DeleteMapping("/delete/{uuid}")
-    public String deleteOffer(@PathVariable("uuid") UUID uuid) {
+    public String deleteOffer(@PathVariable("uuid") UUID uuid,
+                              @AuthenticationPrincipal UserDetails principal) {
         this.offerService.deleteOffer(uuid);
 
         return "redirect:/offers/all";
